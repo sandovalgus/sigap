@@ -1,0 +1,32 @@
+<%= form_for(document_academic) do |f| %>
+  <% if document_academic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(document_academic.errors.count, "error") %> prohibited this document_academic from being saved:</h2>
+
+      <ul>
+      <% document_academic.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :document %>
+    <%= f.text_field :document %>
+  </div>
+
+  <div class="field">
+    <%= f.label :commentary %>
+    <%= f.text_field :commentary %>
+  </div>
+
+  <div class="field">
+    <%= f.label :academic_id %>
+    <%= f.text_field :academic_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,68 @@
+<div class="modal fade" id="modalClinic">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" aria-hidden="true" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title"><i class="fa fa-print" aria-hidden="true"></i>
+ Datos clinicos </h4>
+                        </div>
+
+                        <div class="modal-body">
+                      <%= form_tag new_clinical_path( employee_id: @employee.id do  %>
+
+
+  <div class="field">
+    <%= label :tel_emergency %>
+    <%= text_field :tel_emergency %>
+  </div>
+
+  <div class="field">
+    <%= label :name_contact %>
+    <%= text_field :name_contact %>
+  </div>
+
+  <div class="field">
+    <%= label :name_social_work %>
+    <%= text_field :name_social_work %>
+  </div>
+
+  <div class="field">
+    <%= label :number_partner %>
+    <%= text_field :number_partner %>
+  </div>
+
+  <div class="field">
+    <%= label :blood_type %>
+    <%= text_field :blood_type %>
+  </div>
+
+  <div class="field">
+    <%= label :allergies %>
+    <%= text_field :allergies %>
+  </div>
+
+  <div class="field">
+    <%= label :background %>
+    <%= text_field :background %>
+  </div>
+
+  <div class="field">
+    <%= label :clinical_analyzes %>
+    <%= check_box :clinical_analyzes %>
+  </div>
+
+
+                   
+
+                        </div>
+
+                        <div class="modal-footer">
+                    <button type="submit">Imprimir</button>
+                     <% end %>
+
+                            <button class="btn btn-default" data-dismiss="modal">Cancelar</button>                           
+                        </div>
+
+                    </div>
+                </div>
+            </div>

@@ -1,0 +1,111 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Employees</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Legajo</th>
+      <th>Name</th>
+      <th>Last name</th>
+      <th>Cuil</th>
+      <th>Document type</th>
+      <th>Document number</th>
+      <th>Category</th>
+      <th>Function employee</th>
+      <th>Marital state</th>
+      <th>Relationship of dependency</th>
+      <th>Avatar</th>
+      <th>Date of admission</th>
+      <th>Active</th>
+      <th>City</th>
+      <th>Location</th>
+      <th>State</th>
+      <th>Country</th>
+      <th>Neighborhood</th>
+      <th>Address street</th>
+      <th>Address number</th>
+      <th>Address floor</th>
+      <th>Address floor apartment number</th>
+      <th>Address monoblock</th>
+      <th>Making performance</th>
+      <th>Legal instrument</th>
+      <th>Email</th>
+      <th>Tel cel</th>
+      <th>Tel home</th>
+      <th>Other tel</th>
+      <th>Tel emergency</th>
+      <th>Name contact</th>
+      <th>Tel work</th>
+      <th>Interno tel work</th>
+      <th>Email work</th>
+      <th>Name social work</th>
+      <th>Number partner</th>
+      <th>Blood type</th>
+      <th>Allergies</th>
+      <th>Background</th>
+      <th>Leaving date</th>
+      <th>Reason</th>
+      <th>Clinical analyzes</th>
+      <th>Suitable</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @employees.each do |employee| %>
+      <tr>
+        <td><%= employee.legajo %></td>
+        <td><%= employee.name %></td>
+        <td><%= employee.last_name %></td>
+        <td><%= employee.cuil %></td>
+        <td><%= employee.document_type %></td>
+        <td><%= employee.document_number %></td>
+        <td><%= employee.category %></td>
+        <td><%= employee.function_employee %></td>
+        <td><%= employee.marital_state %></td>
+        <td><%= employee.relationship_of_dependency %></td>
+        <td><%= employee.avatar %></td>
+        <td><%= employee.date_of_admission %></td>
+        <td><%= employee.active %></td>
+        <td><%= employee.city %></td>
+        <td><%= employee.location %></td>
+        <td><%= employee.state %></td>
+        <td><%= employee.country %></td>
+        <td><%= employee.neighborhood %></td>
+        <td><%= employee.address_street %></td>
+        <td><%= employee.address_number %></td>
+        <td><%= employee.address_floor %></td>
+        <td><%= employee.address_floor_apartment_number %></td>
+        <td><%= employee.address_monoblock %></td>
+        <td><%= employee.making_performance %></td>
+        <td><%= employee.legal_instrument %></td>
+        <td><%= employee.email %></td>
+        <td><%= employee.tel_cel %></td>
+        <td><%= employee.tel_home %></td>
+        <td><%= employee.other_tel %></td>
+        <td><%= employee.tel_emergency %></td>
+        <td><%= employee.name_contact %></td>
+        <td><%= employee.tel_work %></td>
+        <td><%= employee.interno_tel_work %></td>
+        <td><%= employee.email_work %></td>
+        <td><%= employee.name_social_work %></td>
+        <td><%= employee.number_partner %></td>
+        <td><%= employee.blood_type %></td>
+        <td><%= employee.allergies %></td>
+        <td><%= employee.background %></td>
+        <td><%= employee.leaving_date %></td>
+        <td><%= employee.reason %></td>
+        <td><%= employee.clinical_analyzes %></td>
+        <td><%= employee.suitable %></td>
+        <td><%= link_to 'Show', employee %></td>
+        <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
+        <td><%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Employee', new_employee_path %>

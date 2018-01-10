@@ -1,0 +1,98 @@
+  <table class="table table-striped">
+    <thead>
+      <tr>
+      <th class="text-xs-center">
+        <i class="fa fa-user fa-lg"  aria-hidden="true"></i>
+      </th>
+      <th>Legajo</th>
+      <th>Apellido y Nombre</th>
+      <th class="text-xs-center">Categoria</th>
+      <th> Regimen </th>
+      <th>N° DNI</th>
+      <!-- <th>Email</th> -->
+      <th class="text-xs-center">Acciones</th>
+      <th></th>
+    </tr>
+  </thead> 
+  <tbody>
+    <% @employee.each do |employee| %>
+      <tr>
+          <td class="text-xs-center">           
+              <% unless employee.avatar.blank? %> <!-- Si no tiene imagen de avatar se toma una por defecto -->
+              <%= image_tag(employee.avatar.url, alt:"avatar_principal", size:"40", :class=>'img-circle img-avatar')%>
+              <% else %>
+              <%=image_tag("users/default_avatar.png", alt:"avatar_principal", size:"40", :class=>'img-circle img-avatar')%>
+              <% end %>  
+          </td>
+          
+          <td class="text-xs-center">          
+            <div class="small text-muted">
+            <%= employee.legajo %>
+            </div>
+          </td>
+
+          <td class="text-xs-center">
+            <%= employee.last_name %>, <%= employee.name %>
+          </td>
+
+          <td class="text-xs-center">
+            <div class="small text-muted">
+              <% employee.labors.order(category: :desc).each do |labor| %>
+                <%= labor.category %>
+                <% break %>
+              <% end %>
+            </div>
+          </td>
+
+          <td class="text-xs-center">
+            <div class="small text-muted">
+              <% employee.labors.order(contracting_regime: :desc).each do |labor| %>
+                <%= labor.contracting_regime %>
+                <% break %>
+              <% end %>
+            </div>
+          </td>
+
+          <td class="text-xs-center">
+            <div><%= employee.document_number %></div>
+            <div class="small text-muted">
+            CUIL: <%= employee.cuil %>              
+            </div>
+          </td>
+           <td>
+          <span>
+            <%= link_to employee_path(employee), class: "btn btn-default print_list" do %>
+                <i class="fa fa-eye fa-lg"></i>
+            <% end %>   
+          </span>             
+        </td>
+        <td>
+        <div class="btn-table-users">
+
+        <% academic_style = employee.academics.present? ? 'btn-default btn-xs btn-load tag-tooltip' : 'btn-default btn-xs btn-no-load tag-tooltip' %>
+
+        <%= link_to '<i class="fa fa-graduation-cap" aria-hidden="true"></i>'.html_safe, academics_path(:id => employee.id), class:  academic_style.html_safe, :data => {:toggle=>"tooltip"}, 'data-original-title' => "Formación Académica" %>
+    
+        <% labor_style = employee.labors.present? ? 'btn-default btn-xs btn-load tag-tooltip' : 'btn-default btn-xs btn-no-load tag-tooltip' %>
+
+        <%= link_to '<i class="fa fa-handshake-o" aria-hidden="true"></i>'.html_safe , labors_path(:id => employee.id), class:  labor_style.html_safe, :data => {:toggle=>"tooltip"}, 'data-original-title' => "Datos Laborales" %>
+    
+        <% clinical_style = employee.clinical ? 'btn-default btn-xs btn-load tag-tooltip' : 'btn-default btn-xs btn-no-load tag-tooltip' %>
+
+        <%= link_to '<i class="fa fa-medkit" aria-hidden="true"></i>'.html_safe,  clinicals_path(:ids => employee.id), class:  clinical_style.html_safe, :data => {:toggle=>"tooltip"}, 'data-original-title' => "Datos Clínicos" %>
+
+        <% family_style = employee.family_groups.present? ? 'btn-default btn-xs btn-load tag-tooltip' : 'btn-default btn-xs btn-no-load tag-tooltip' %>
+
+        <%= link_to '<i class="fa fa-users" aria-hidden="true"></i>'.html_safe, family_groups_path(:employee_id => employee.id), class: family_style.html_safe, :data => {:toggle=>"tooltip"}, 'data-original-title' => "Grupo Familiar" %>
+
+    
+
+
+
+        </div>
+        </td>
+
+      </tr>
+    <%end%>
+  </tbody>
+</table> 

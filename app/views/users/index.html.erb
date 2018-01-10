@@ -1,0 +1,85 @@
+<!-- Listado de Usuarios -->
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<div class="panel-heading clearfix">
+            <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Usuarios</h4>
+            <div class="input-group">                    
+                <div class="input-group-btn">
+                	<button class="btn btn-primary pull-right"><i class="fa fa-user-plus"></i></button>
+                    <button class="btn btn-primary pull-right"><i class="fa fa-search"></i></button>
+                    <input type="text" class="form-control pull-right" placeholder="Buscar" style="max-width: 200px;">                    
+                </div>
+            </div>
+        </div>
+	</div>
+	<div class="panel-body">
+		<table class="display compact nowrap" width="100%" cellspacing="0" id="users">
+			<thead class="thead-default">
+				<tr>
+					<th class="text-xs-center">
+						<i class="fa fa-user fa-lg"  aria-hidden="true"></i>
+					</th>
+					<th>Usuario</th>
+					<th class="text-xs-center">Email</th>
+					<th>Rol</th>
+					<th class="text-xs-center">Estado</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @users = User.all %>
+				<% @users.each do |user| %>
+					<% if !user.status %> <!-- Si el usuario no esta activo se lo marca en rojo -->
+					<tr class="bg-danger">
+					<%else%>
+					<tr>
+					<%end%>
+						<td class="text-xs-center">
+							<% if user.avatar != nil%>  <!-- Si no tiene imagen de avatar se toma una por defecto -->               
+					        	<%= image_tag(user.avatar.url, alt:"avatar_menu", size:"60", :class=>'img-circle img-avatar')%>
+					      	<%else%>
+					        	<%=image_tag("users/avatar_menu.png", alt:"avatar_menu", size:"60", :class=>'img-circle img-avatar')%>  
+					      	<%end%>
+						</td>
+						<td class="text-xs-center">
+							<div><%= user.last_name %>, <%= user.first_name %></div>
+							<div class="small text-muted">Registrado: <%= user.created_at %></div>
+						</td>
+						<td class="text-xs-center"><%= user.email %></td>
+						<td class="text-xs-center">
+							<% if user.permission_level == 0 %>
+								Usuario
+							<%else%>
+								<% if user.permission_level == 1 %>
+									Administrador
+								<%else%>
+									Super Usuario
+								<%end%>
+							<%end%>
+						</td>
+						<td class="text-xs-center">
+							<% if !user.status %>
+								<div class="alert-danger">Inactivo</div>
+							<%else%>
+								<div class="alert-success">Activo</div>
+							<%end%>
+							<div class="small text-muted">Última vez activo: <%= user.last_sign_in_at %></div>
+						</td>
+						<td>
+							<span>
+								<%= link_to user_path(user.id), class: "btn btn-default" do %>
+    								<i class="fa fa-eye fa-lg"></i>
+								<% end %>		
+							</span>	
+							<span>
+								<%= link_to edit_user_path(user.id), class: "btn btn-default" do %>
+    								<i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+								<% end %>		
+							</span>							
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>		
+	</div>
+</div>

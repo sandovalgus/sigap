@@ -1,0 +1,68 @@
+<fieldset>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="field">
+                        <div class="form-group">
+                            <%= f.label :family_ties, "Relacion Familiar" %>
+                            <%= f.select :family_ties, FamilyGroup.family_ties.options ,{},class: "form-control input-sm" %> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="field">
+                        <div class="form-group">
+                            <%= f.label :name, "Nombre" %>
+                            <%= f.text_field :name, autofocus: true,requiered: false, :class=>"form-control input-xs" ,placeholder: "Nombre" %> 
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="field">
+                        <div class="form-group">
+                            <%= f.label :last_name, "Apellido" %>
+                            <%= f.text_field :last_name, autofocus: true, requiered: false, :class=>"form-control input-xs" ,placeholder: "Apellido" %> 
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="field">
+                        <div class="form-group">
+                            <%= f.label :document_numbre , "Numero de Documento" %>
+                            <%= f.text_field :document_numbre, autofocus: true,requiered: false,:class=>"form-control input-xs" ,placeholder: "Numero de Documento" %> 
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= f.label :cuil , "CUIL" %>
+                        <%= f.text_field :cuil, autofocus: true,requiered: false,:class=>"form-control input-xs" ,placeholder: "CUIL" %> 
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="field">
+                        <%= f.fields_for :document_families do |document_step| %>
+                        <div class="form-group">
+                            <%= document_step.label :document, "Documentos varios" %>
+                            <%= document_step.file_field :document, class: "btn btn-info btn-xs"%> 
+                        </div>
+                        <%end%>  
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <%= f.label :photocopy_document, "Fotocopia Documento " %>
+                        <%= f.file_field :photocopy_document,class: "btn btn-info btn-xs"%> 
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </div>
+</fieldset>

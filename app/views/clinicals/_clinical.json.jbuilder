@@ -1,0 +1,2 @@
+json.extract! clinical, :id, :tel_emergency, :name_contact, :name_social_work, :number_partner, :blood_type, :allergies, :background, :clinical_analyzes, :created_at, :updated_at
+json.url clinical_url(clinical, format: :json)

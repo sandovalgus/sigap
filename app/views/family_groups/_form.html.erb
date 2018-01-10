@@ -1,0 +1,138 @@
+<% if family_group.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(family_group.errors.count, "error") %> prohibited this clinical from being saved:</h2>
+    <ul>
+    <% family_group.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+    <%= form_for(@family_group, :builder => Judge::FormBuilder ,remote: request.xhr?, html: { data: { modal: true  } }) do |f| %>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="field">
+            <div class="form-group">
+              <%= f.label :family_ties, "Relacion Familiar" %>
+              <% if @query.present? %>
+                <%= f.select :family_ties, options_for_select(["PADRE", "MADRE", "HIJO/A", "HERMANO/A", "OTROS"]), class: "form-control input-sm"%>
+              <%else%>
+                <%= f.select :family_ties, FamilyGroup.family_ties.options ,{}, class: "form-control input-sm" %> 
+              <%end%>
+            </div>
+          </div>
+        </div>           
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="field">
+            <div class="form-group">
+              <%= f.label :name , "Nombre" %>
+              <p class="errores" id="family_group_name"><%= @family_group.errors[:name].to_s[/\w([^"]*)/] %></p>
+              <%= f.text_field :name,:validate => true, autofocus: true,:class=>"form-control input-xs validation" ,placeholder: "Nombre", :required => true %>         
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= f.label :last_name , "Apellido" %>
+            <p class="errores" id="family_group_last_name"><%= @family_group.errors[:last_name].to_s[/\w([^"]*)/] %></p>
+            <%= f.text_field :last_name,:validate => true, autofocus: true,:class=>"form-control input-xs validation" ,placeholder: "Apellido", :required => true %> 
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="field">
+            <div class="form-group">
+              <%= f.label :document_numbre , "Numero de Documento" %>
+              <p class="errores" id="family_group_document_numbre"><%= @family_group.errors[:document_numbre].to_s[/\w([^"]*)/] %></p>
+              <%= f.text_field :document_numbre,:validate => true, autofocus: true,requiered: false,:class=>"form-control input-xs validation" ,placeholder: "Numero de Documento", :required => true %> 
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+<!--             <%= f.label :cuil , "CUIL" %>
+            <%= f.text_field :cuil, autofocus: true,requiered: false,:class=>"form-control input-xs" ,placeholder: "CUIL" %>  -->
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group">
+            <%= f.label :Birthday, "Fecha de nacimiento" %>
+            <% fecha = @family_group.Birthday !=nil ? (@family_group.Birthday.strftime "%d/%m/%Y") : '' %>
+            <%= f.text_field :Birthday, :class => 'datepicker', value: fecha , 'placeholder'=> "dd-mm-yyyy"  %><br/>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="input-group">
+            <%= f.label :live, "¿Vive?" %>
+            <%= f.check_box :live, {'type' => 'checkbox'} %>  
+          </div>
+        </div>
+      </div>
+      <br/>
+        <div class="field">
+          <div class="form-group ">
+            <%= f.fields_for :attachment_files do |attachment| %>
+              <%= render 'attachment_file_fields', f: attachment %>
+            <%end%>  
+            <%= link_to_add_fields 'Agregar Documento Adjunto <i class="fa fa-plus fa-1x" aria-hidden="true"></i>'.html_safe, f, :attachment_files %> 
+          </div>
+        </div>
+        <div class="btn-action">
+          <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+            <i class="fa fa-floppy-o " aria-hidden="true"></i>
+              Guardar
+          <% end %>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        </div>       
+    <%end%>
+
+  <script>
+    $( document ).ready(function() {  
+$('.validation').on('input select', function() {
+    judge.validate($(this)[0], {
+    
+        valid: function(element) {
+                element.style.border = '2px solid green';
+                 $("p").fadeOut();
+                var name = $('input[id="family_group_name"]').val();
+                var last_name = $('input[id="family_group_last_name"]').val();
+                 var document_numbre = $('input[id="family_group_document_numbre"]').val();
+                
+                if (name.length == 0 || last_name.length == 0  || document_numbre.length == 0){
+                  console.log ("no pasa");
+                  // $('button:submit').attr("disabled", true);
+                }else{
+                  // $('button:submit').attr("disabled", false);
+                  console.log("pasa");
+                }
+        },
+        invalid: function(element, messages) {
+              console.log(element.id);
+          // $('button:submit').attr("disabled", true);
+           element.style.border = '2px solid red';
+           document.getElementById(element.id).innerHTML = (messages.join(','));
+           console.log("*****************");
+           console.log(element.id);
+           $('#'+element.id).fadeIn("slow");
+
+          }
+    });
+ });
+
+
+    $('.datepicker').datepicker({dateFormat: 'dd/mm/yyyy',
+        language: 'es',
+        startView: 2  
+    });
+
+});
+  </script>

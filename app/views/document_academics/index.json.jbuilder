@@ -1,0 +1,1 @@
+json.array! @document_academics, partial: 'document_academics/document_academic', as: :document_academic

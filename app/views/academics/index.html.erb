@@ -1,0 +1,175 @@
+<div class="x_panel">
+  <div class="x_title">
+    <h2>Formación Académica</h2>
+    <div class="btn-action">
+      <button type="button" class="btn btn-defult" data-toggle="modal" title="Agregar Formacion Academica" data-target="#myModal">
+        <i class="fa fa-plus" aria-hidden="true"></i> <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+      </button>
+      <%= link_to 'Volver <i class="fa fa-undo" aria-hidden="true"></i>'.html_safe,employee_path(@employee) ,class: 'btn btn-default tag-tooltip', :data => {:toggle=>"tooltip"}, 'data-original-title' => "Volver" %><span>
+    </div> <!-- Fin btn-action -->
+    <div class="clearfix"></div>
+  </div> <!-- Fin x_title -->
+  
+  <div class="panel-body">
+    <div class="card-block">
+      <!-- Datos del empleado -->
+      <%= render "partials/header_employee" %>
+      <!-- Fin datos del empleado -->
+      <!-- Verificar si existen datos de formación académica -->
+      <% if @academics.present? %>
+        <!-- Formación académica -->
+        <div class="container">
+          <div class="row">
+          <% @academics.each do |academic|%>
+            <div class="col-xs-18 col-sm-6 col-md-3">
+              <div class="thumbnail" style="padding: 0;">
+                <div class="well">
+                  <p style="text-align: center;">
+                    <% if academic.academic_training == 'Secundario' %>
+                    <i class="fa fa-graduation-cap fa-5x" aria-hidden="true"></i><br>
+                    <%else%>
+                    <i class="fa fa-university fa-5x" aria-hidden="true"></i><br>
+                    <%end%>
+                    <%= academic.academic_training %>                   
+                  </p>
+                </div>
+                <div class="caption" style="text-align: center;">
+                  <p>
+                    <h4>
+                      <strong>
+                      <%= academic.establishment %>
+                      </strong>
+                    </h4>
+                    <h5>
+                      <%= academic.discipline %>
+                    </h5>
+                    <small class="text-muted">
+                      <%= academic.start_data !=nil ? (academic.start_data.strftime "%Y") : '' %> - <%= academic.finish_data !=nil ? (academic.finish_data.strftime "%Y") : '' %>                
+                    </small><br>
+                    <% if academic.status == 'Completo' %>
+                    <span class="label label-xs label-success">
+                      <i class="fa fa-check" aria-hidden="true">
+                        <%= academic.status %>
+                      </i><!-- Estado -->
+                    </span>
+                      <% else %>
+                        <% if academic.status == 'Incompleto' %>
+                        <span class="label label-xs label-warning">
+                          <i class="fa fa-times" aria-hidden="true">
+                            <%= academic.status %>
+                          </i>
+                        </span>
+                        <% else %>
+                        <span class="label label-xs label-primary">
+                          <i class="fa fa-refresh" aria-hidden="true">
+                            <%= academic.status %>
+                          </i>
+                        </span>
+                        <% end%>
+                      <%end%>
+                    </a>
+                    <br>
+                    <p class="comment more">
+                      <%= academic.description %>                   
+                    </p>
+                  </p>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="field">
+                        <% academic.document_academics.each do |doc| %>
+                          <% if doc.document %>
+                            <span>
+                              <%= link_to '<i class="fa fa-paperclip" aria-hidden="true"></i>'.html_safe, doc.document_url,  :target => "_blank", class: "btn btn-default btn-xs" %>
+                              <% unless doc.commentary.blank? %>
+                                <%= doc.commentary %>
+                              <% else %>
+                                Descripción sin especificar
+                              <% end %>
+                              <br>
+                            </span>
+                          <%end%>
+                        <%end%>
+                      </div>
+                    </div>
+                  </div>
+                </div> <!-- end caption -->
+
+                <div class="panel-footer"> 
+                  <%= link_to '<i class="fa fa-pencil" aria-hidden="true"></i>'.html_safe, edit_academic_path(academic), data: { modal: true }, class: 'btn btn-default'  %>
+                  <%= link_to '<i class="fa fa-trash-o" aria-hidden="true"></i>'.html_safe, academic, method: :delete, data: { confirm: '¿Estás seguro de eliminar este registro?' }, class: 'btn btn-danger'  %>
+                </div>
+
+
+              </div>
+            </div>
+            <% end %>
+          </div> <!-- End row -->
+        </div>
+
+      <% else %>
+        <!-- No existen datos de formación académica para este empleado -->
+        <fieldset class="">
+        <br/>
+          <div class="alert alert-warning">
+            <h3 align="center"><strong>No se han agregados datos de formación académica</strong> <span class="label label-warning"><i class="fa fa-exclamation" aria-hidden="true"></i></span></h3>
+          </div>
+        </fieldset>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+
+<!-- Modal New-->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Agregar formación académica</h4>
+        </div>
+        <div class="modal-body">
+             <%= render 'form', academic: @academic %>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      var showChar = 100;
+      var ellipsestext = "...";
+      var moretext = "ver mas";
+      var lesstext = "ver menos";
+      $('.more').each(function() {
+        var content = $(this).html();
+
+        if(content.length > showChar) {
+
+          var c = content.substr(0, showChar);
+          var h = content.substr(showChar-1, content.length - showChar);
+
+          var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+
+          $(this).html(html);
+        }
+
+      });
+
+      $(".morelink").click(function(){
+        if($(this).hasClass("less")) {
+          $(this).removeClass("less");
+          $(this).html(moretext);
+        } else {
+          $(this).addClass("less");
+          $(this).html(lesstext);
+        }
+        $(this).parent().prev().toggle();
+        $(this).prev().toggle();
+        return false;
+      });
+    });
+  </script>

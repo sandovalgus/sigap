@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <%= stylesheet_link_tag wicked_pdf_asset_base64("pdf") %>
+  </head>
+  <body onload="number_pages()">
+    <hr>
+    <p class="footer-print">SISTEMA PROVINCIAL DE TELEEDUCACION Y DESARROLLO: Av. Uruguay 4545- TelFax: (0376) 4458221 /222 /223 - www.sipted.misiones.gov.ar</p>
+    <div class="hora">Impreso: <%= Time.now.strftime("%d-%m-%Y") %>, <%= Time.now.strftime("%R")%>
+      <div class="pull-right">
+      Página <span class="page"></span> de <span class="topage"></span>
+      </div>
+    </div>
+  </body>
+  <%= javascript_include_tag wicked_pdf_asset_base64("myjs") %>
+</html>

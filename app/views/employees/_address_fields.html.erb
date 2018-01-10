@@ -1,0 +1,96 @@
+<fieldset class="scheduler-border">
+  <legend class="scheduler-border"><i class="fa fa-map-marker" aria-hidden="true"></i> Domicilio
+  </legend>
+
+    
+        <div class="row"><!--row #7 -->
+          <div class="col-md-6">
+            <div class="field">
+              <div class="form-group">
+              <%= f.label :address_street, "Avenida - Calle" %>
+              <%= f.text_field :address_street, autofocus: true,requiered: false,:class=>"form-control input-sm" ,placeholder: "Avenida Calle" %>  
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="field">
+              <div class="form-group">
+              <%= f.label :address_number, "Número" %>
+              <%= f.text_field :address_number, autofocus: true,requiered: false, :class=>"form-control input-sm" ,placeholder: "Número" %>  
+              </div>
+            </div>
+          </div>
+
+        </div><!--end row#5
+        -->
+        <div class="row"><!--row #8-->
+          <div class="col-md-4">
+            <div class="field">
+              <div class="form-group">
+              <%= f.label :address_floor, "N° de piso" %>
+              <%= f.text_field :address_floor, autofocus: true,requiered: false, :class=>"form-control input-sm" ,placeholder: "Piso" %>  
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="field">
+              <div class="form-group">
+              <%= f.label :address_floor_apartment_number, "N° de Departamento" %>
+              <%= f.text_field :address_floor_apartment_number, autofocus: true,requiered: false, :class=>"form-control input-sm" ,placeholder: "Número de Departamento" %>  
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="field">
+              <div class="form-group">
+              <%= f.label :address_monoblock, "N° de Monoblock" %>
+              <%= f.text_field :address_monoblock, autofocus: true,requiered: false, :class=>"form-control input-sm" ,placeholder: "Número de Monoblock" %>  
+              </div>
+            </div>
+          </div>
+
+        </div><!--end row#8 -->
+        <div class="row"><!--row #9 -->
+          <div class="col-md-12">
+            <div class="field">
+              <div class="form-group">
+              <%= f.label :neighborhood, "Barrio" %>
+              <%= f.text_field :neighborhood, autofocus: true,requiered: false, :class=>"form-control input-sm" ,placeholder: "Barrio" %>  
+              </div>
+            </div>
+          </div>
+
+        </div><!--end row#9 -->
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group"> 
+              <%= f.label :country, "Pais" %>
+          <%= f.collection_select  :country, Country.order(:name), :id, :name, include_blank: true  %>
+            </div>
+          </div>
+          
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= f.label :state, 'Provincia' %>
+              <%= f.grouped_collection_select :state, Country.order(:name), :states, :name, :id, :name, include_blank: true %>
+            </div>
+          </div>
+          
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= f.label :city_id, 'Ciudad' %>
+              <%= f.grouped_collection_select :city_id, State.order(:name), :cities, :name, :id, :name, include_blank: true %>
+            </div>
+          </div>
+        </div> <!-- Fin row -->
+        <div class="row">
+          <div class="col-md-4">
+              <%= f.label "Domicilio actual" %> <br />
+            <%= f.check_box :actual %>
+          </div>
+        </div>
+        <%= f.hidden_field :_destroy%>
+        <%= link_to 'Eliminar Domicilio <i class="fa fa-times fa-1x" aria-hidden="true"></i>'.html_safe, '#', class: "remove_fields btn btn-danger" %>
+
+
+</fieldset>

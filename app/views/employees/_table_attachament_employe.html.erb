@@ -1,0 +1,20 @@
+                          <field>
+                            <table class="table table-striped">
+                              <thead>
+                                <th></th>
+                                <th>Nombre</th>
+                                <th>Comentario</th>
+                                <th>Subido</th>
+                              </thead>
+                              <tbody>
+                                <% @employee.attachment_files.each do |attachment| %>
+                                  <tr>
+                                    <td><%= link_to '<i class="fa fa-paperclip" aria-hidden="true"></i>'.html_safe, attachment.document_url,  :target => "_blank", class: "btn btn-default btn-xs"%></td>
+                                    <td><%= attachment.name %></td>
+                                    <td><%= attachment.commentary %></td>
+                                    <td><%= attachment.created_at %></td>
+                                  </tr>
+                                <%end%>
+                              </tbody>
+                            </table>
+                          </field>

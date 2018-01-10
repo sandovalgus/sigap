@@ -1,0 +1,38 @@
+<fieldset>
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-lg-12 col-sm-12 col-md-12">
+					<div class="form-group ">
+						<% if f.object.document? %>
+							<strong>Documento: </strong>						
+							<%= f.object.document_url.to_s.split("/").last %>		
+						<%else%>
+							<%= f.file_field :document, class: "file" %>
+							<%= f.hidden_field :document_cache %>
+						<%end%>
+					</div>
+				</div> 
+				<div class="col-lg-6 col-sm-6 col-md-6">
+					<div class="form-group">
+						<strong>Nombre </strong>
+						<%= f.text_field :name, class: "form-control area", placeholder: "* Nombre", :required => true %>
+					</div>
+				</div>
+				<div class="col-lg-6 col-sm-6 col-md-6">
+					<div class="form-group">
+						<strong>Comentario </strong>
+						<%= f.text_area :commentary, class: "form-control area", rows: 2, placeholder: "* Comentario", :required => true %>
+					</div>
+				</div>				
+    		</div>
+
+    		<div class="row">
+    			<div class="col-md-12">
+    				<%= f.hidden_field :_destroy %>
+		  			<%= link_to  'Eliminar Documento <i class="fa fa-times fa-1x" aria-hidden="true"></i>'.html_safe, '#', class: "remove_fields btn btn-danger" %>
+    			</div>
+    		</div>
+		</div> 
+	</div>
+</fieldset>

@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Tel emergency:</strong>
+  <%= @clinical.tel_emergency %>
+</p>
+
+<p>
+  <strong>Name contact:</strong>
+  <%= @clinical.name_contact %>
+</p>
+
+<p>
+  <strong>Name social work:</strong>
+  <%= @clinical.name_social_work %>
+</p>
+
+<p>
+  <strong>Number partner:</strong>
+  <%= @clinical.number_partner %>
+</p>
+
+<p>
+  <strong>Blood type:</strong>
+  <%= @clinical.blood_type %>
+</p>
+
+<p>
+  <strong>Allergies:</strong>
+  <%= @clinical.allergies %>
+</p>
+
+<p>
+  <strong>Background:</strong>
+  <%= @clinical.background %>
+</p>
+
+<p>
+  <strong>Clinical analyzes:</strong>
+  <%= @clinical.clinical_analyzes %>
+</p>
+
+<%= link_to 'Edit', edit_clinical_path(@clinical) %> |
+<%= link_to 'Back', clinicals_path %>

@@ -1,0 +1,26 @@
+<%@bandera = params[:bandera]%>
+<div class="modal" id="mainModal" tabindex="-1" role="dialog" aria-labelledby="mainModalLabel" aria-hidden="true">
+  <div class="modal-dialog">  
+   
+	<% if params[:bandera].to_i == 1 %>
+		<div class="panel panel-danger">
+	<% else %>
+		<% if params[:bandera].to_i == 2 %>
+			<div class="panel panel-warning">
+		<%else%>
+			<div class="panel panel-primary">
+		<% end %>
+	<% end %>
+			<div class="panel-heading">
+				<div class="panel-heading clearfix">
+					<h4 class="modal-title" id="mainModalLabel"> 
+						<%= yield :title if content_for? :title %>&nbsp; 
+					</h4>
+				</div>
+			</div>
+			<div class="panel-body">
+				<%= yield %>
+			</div>
+		</div>
+	</div>
+</div>

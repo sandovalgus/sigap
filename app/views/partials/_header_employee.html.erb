@@ -1,0 +1,37 @@
+<div class="border">
+  <div class="employee-header">
+      <% unless @employee.avatar.blank? %>
+        <%= image_tag(@employee.avatar.url, alt:"avatar_menu", size:"60", :class=>'img-circle')%>
+      <% else %>
+        <%=image_tag("users/avatar_menu.png", alt:"Card image cap", size:"60", :class=>'img-circle')%>         
+      <% end %> 
+  </div>
+  <div>
+    <ul class="list-inline">
+      <li class="list-inline-item">
+        <ul class="list-inline">
+          <li class="list-inline-item">
+            <h6 class="card-subtitle">Legajo: </h6>
+          </li>
+          <li class="list-inline-item">
+            <h4 class="card-subtitle text-muted"><%= @employee.legajo %></h4>    
+          </li>
+          <li class="list-inline-item">
+            <h6 class="card-subtitle">N° DNI: </h6>
+          </li>
+          <li class="list-inline-item">
+            <h4 class="card-subtitle text-muted"><%= @employee.document_number %></h4>    
+          </li>
+        </ul>
+        <ul class="list-inline">
+          <li class="list-inline-item">
+            <h6 class="card-subtitle">Apellido y Nombre: </h6>
+          </li>
+          <li class="list-inline-item">
+            <h4 class="card-subtitle text-muted"><%= @employee.name %> <%= @employee.last_name %></h4>   
+          </li>  
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>

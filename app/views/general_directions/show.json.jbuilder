@@ -1,0 +1,1 @@
+json.partial! "general_directions/general_direction", general_direction: @general_direction

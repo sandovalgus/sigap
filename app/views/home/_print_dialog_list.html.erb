@@ -1,0 +1,82 @@
+<div class="modal listModal" id="miModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" aria-hidden="true" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title"><i class="fa fa-print" aria-hidden="true"></i>
+  Campos a imprimir </h4>
+                        </div>
+
+
+   <%= form_tag listpdf_home_path(@employee, format: :pdf, :html => {:class => "form_print_dialog"}, :method => "post"), :target => '_blank' do  %>
+
+
+                        <div class="modal-body">
+          
+                         <ul class="list-group">
+                            <li class="list-group-item">
+                                  Apellido y Nombre
+                                <div class="material-switch pull-right">
+                                    <%= check_box_tag :name_and_lastname %>
+                                    <label for="name_and_lastname" class="label-success"></label>
+                                </div>
+                            </li>
+
+                             <li class="list-group-item">
+                                    Legajo
+                                    <div class="material-switch pull-right">
+                                        <%= check_box_tag :legajo %>
+                                        <label for="legajo" class="label-success"></label>
+                                    </div>
+                            </li>
+                            <!-- Disabled -->
+                            <li class="list-group-item">
+                                <strike>Categoría</strike><small><mark>Temporalmente deshabilitado.</mark></small>
+                                <div class="material-switch pull-right">
+                                    <%= check_box_tag :categoria %>
+                                    <label for="categoria" class="label-success"></label>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <strike>Regimen</strike><small><mark>Temporalmente deshabilitado.</mark></small>
+                                <div class="material-switch pull-right">
+                                    <%= check_box_tag :regimen %>
+                                    <label for="regimen" class="label-success"></label>
+                                </div>
+                            </li>
+                            <!-- End Disabled -->
+                             <li class="list-group-item">
+                                D.N.I
+                                <div class="material-switch pull-right">
+                                    <%= check_box_tag :dni %>
+                                    <label for="dni" class="label-success"></label>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                C.U.I.L
+                                <div class="material-switch pull-right">
+                                    <%= check_box_tag :cuil %>
+                                    <label for="cuil" class="label-success"></label>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                Email
+                                <div class="material-switch pull-right">
+                                    <%= check_box_tag :email %>
+                                    <label for="email" class="label-success"></label>
+                                </div>
+                            </li>
+                         </ul>
+                        </div>
+
+                        <div class="modal-footer">
+                    <button class="btn btn-default"  type="submit">Imprimir</button>
+                   
+                            <button class="btn btn-default" data-dismiss="modal">Cancelar</button>                           
+                        </div>
+                          <%end%>
+
+
+                    </div>
+                </div>
+            </div>

@@ -1,0 +1,1 @@
+json.partial! "clinicals/clinical", clinical: @clinical

@@ -1,0 +1,1 @@
+json.array! @general_directions, partial: 'general_directions/general_direction', as: :general_direction

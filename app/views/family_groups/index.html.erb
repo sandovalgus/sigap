@@ -1,0 +1,165 @@
+<div class="x_panel">
+  <div class="x_title">
+    <h2>Datos de Familiares</h2>
+    <div class="btn-action">
+      <%= link_to '<i class="fa fa-user-plus" aria-hidden="true"></i>'.html_safe, new_family_group_path, data:{ modal: true, :toggle=>"tooltip"}, class: 'btn btn-default tag-tooltip', 'data-original-title' => "Agregar Familiar"   %>
+
+      <%= link_to 'Volver<i class="fa fa-undo" aria-hidden="true"></i>'.html_safe,employee_path(@employee) ,class: 'btn btn-default tag-tooltip', :data => {:toggle=>"tooltip"}, 'data-original-title' => "Volver"   %>  
+    </div>  
+    <div class="clearfix"></div>
+</div>
+
+<%= render "partials/header_employee"%>
+<!-- <br>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <%= link_to 'Agregar Familiar <i class="fa fa-user-plus" aria-hidden="true"></i>'.html_safe, new_family_group_path,data: { modal: true },class: 'btn btn-default btn-lg btn-block'  %> <span></span>
+  </div>
+</div>
+<br/  > -->
+<% if @family_groups.any?  %>
+  <% @family_groups.each do |family_group| %>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+          <div class="panel-heading"><%= family_group.family_ties  %>
+            <div class="btn-action">
+              <%= link_to '<i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i>'.html_safe, edit_family_group_path(family_group), class: "btn btn-primary  btn-xs tag-tooltip",:data => {:toggle=>"tooltip", modal: true},
+                    'data-original-title' => "Editar" %><span></span>
+
+              <%= link_to '<i class="fa fa-trash-o  fa-1x" aria-hidden="true"></i>'.html_safe, family_group, method: :delete, class: "btn btn-danger btn-xs tag-tooltip",:data => {:toggle=>"tooltip", confirm: '¿Seguro que desea eliminar este Familiar?'},
+                    'data-original-title' => "Eliminar" %><span></span>
+            </div>
+          </div>
+          <div class="panel-body">                             
+            <div class="row">
+              <div class="col-md-6">
+                <div class="field">
+                  <div class="form-group">
+                    <strong>Relacion familiar:</strong>
+                    <%= family_group.family_ties  %> 
+                  </div>
+                </div>
+              </div>                             
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="field">
+                  <div class="form-group">
+                    <strong>Nombre</strong>
+                    <%=  family_group.name %> 
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <strong>Apellido</strong>
+                  <%= family_group.last_name %> 
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="field"> 
+                  <div class="form-group">
+                    <strong>N. Documento</strong>
+                    <%= family_group.document_numbre  %> 
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <strong>C.U.I.L:</strong>
+                  <%= family_group.cuil %> 
+                </div>
+              </div>
+            </div>
+            <div class="row"> 
+              <div class="col-md-6">
+                <div class="form-group">
+                  <strong>Fecha de Nacimiento:</strong>
+                  <%=   family_group.Birthday !=nil ? (family_group.Birthday.strftime "%d/%m/%Y") : ''   %>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <strong>Edad:</strong>
+                  <%= family_group.Birthday.present? ? get_age(family_group.Birthday) : '' %>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <% family_group.attachment_files.each do |doc| %>           
+                  <div class="form-group">
+                    <% if doc.document %>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <span>
+                            <%= link_to '<i class="fa fa-paperclip" aria-hidden="true"></i>'.html_safe, doc.document_url,  :target => "_blank", class: "btn btn-default btn-xs"%>
+                            <% unless doc.commentary.blank? %>
+                              <%= doc.commentary %>
+                            <%else%>
+                              Descripcion sin especificar
+                            <%end%>            
+                          </span>                
+                        </div>
+                      </div>
+                    <%end%>
+                  </div>
+                <%end%>
+              </div>    
+            </div>
+          </div> <!-- Fin panel-body -->
+        </div>
+      </div>
+    </div> <!-- Fin row -->
+  <%end%>
+<% else %>
+  <fieldset class="msj-border"><br/>
+    <div class="alert alert-warning">
+      <h3><strong>Aun no se a agregado ningun Familiar </strong> <span class="label label-warning"><i class="fa fa-exclamation " aria-hidden="true"></i></span></h3>
+    </div>
+  </fieldset>
+  </div>
+</div>
+<%end%>
+<br>
+</div> 
+  <!-- Trigger the modal with a button -->
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Agregar Familiar</h4>
+        </div>
+        <div class="modal-body">
+             <%= render 'form', family_group: @family_group %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+
+               
+             
+
+
+
+
+
+
+
+
+
+
+
+

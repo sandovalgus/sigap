@@ -1,0 +1,81 @@
+<% content_for :title, "Familiar" %>
+<div class="well">
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="field">
+        <div class="form-group">
+          <strong>Relación Familiar: </strong>
+          <%= @family_group.family_ties %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="field">
+        <div class="form-group">
+          <strong>Apellido y Nombre: </strong>
+          <%= @family_group.last_name %>, <%= @family_group.name %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="field">
+        <div class="form-group">
+          <strong>Número de DNI: </strong>
+          <%= @family_group.document_numbre %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="row">
+    <div class="col-md-6">
+      <div class="field">
+        <div class="form-group">
+          <strong>Número de CUIL: </strong>
+          <%= @family_group.cuil %>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="field">
+          <% @family_group.document_families.each do |doc| %>
+          <div class="form-group">
+            <%  if doc.document %>
+            <div class="row">
+              <div class="col-md-12">
+                <span>
+                  <%= link_to '<i class="fa fa-paperclip" aria-hidden="true"></i>'.html_safe, doc.document_url,  :target => "_blank", class: "btn btn-default btn-xs" %>
+                  <% unless doc.commentary.blank? %>
+                    <%= doc.commentary %>
+                  <% else %>
+                    Descripción sin especificar
+                  <% end %>
+                </span>
+              </div>
+            </div>
+            <% end %>
+          </div>
+          <% end %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">    
+    <div class="col-md-6">    
+      <div class="btn-action">
+        <%= link_to 'Ir a familiares <i class="fa fa-arrow-right" aria-hidden="true"></i>'.html_safe, family_groups_path(@family_group, :employee_id => @family_group.employee_id), class: 'btn btn-success'  %>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div> <!-- Fin div well -->

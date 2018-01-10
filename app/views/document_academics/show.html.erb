@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Document:</strong>
+  <%= @document_academic.document %>
+</p>
+
+<p>
+  <strong>Commentary:</strong>
+  <%= @document_academic.commentary %>
+</p>
+
+<p>
+  <strong>Academic:</strong>
+  <%= @document_academic.academic %>
+</p>
+
+<%= link_to 'Edit', edit_document_academic_path(@document_academic) %> |
+<%= link_to 'Back', document_academics_path %>

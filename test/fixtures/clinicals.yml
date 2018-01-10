@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tel_emergency: MyString
+  name_contact: MyString
+  name_social_work: MyString
+  number_partner: MyString
+  blood_type: MyString
+  allergies: MyString
+  background: MyString
+  clinical_analyzes: false
+
+two:
+  tel_emergency: MyString
+  name_contact: MyString
+  name_social_work: MyString
+  number_partner: MyString
+  blood_type: MyString
+  allergies: MyString
+  background: MyString
+  clinical_analyzes: false

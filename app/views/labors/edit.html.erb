@@ -1,0 +1,16 @@
+<% puts "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"%>
+<% puts params[:bandera].inspect %>
+
+<% if params[:bandera].to_i == 1 %>
+	<% content_for :title, "Dar de baja este dato Laboral" %> 
+	<%= render 'form_status', labor: @labor %>
+<% else %>
+	<% if params[:bandera].to_i == 2 %>
+		<% content_for :title, "Dar de alta este dato Laboral" %> 
+		<%= render 'form_status_up', labor: @labor %>
+	<% else %>
+		<% content_for :title, "Editar dato Laboral" %> 
+		<%= render 'form', labor: @labor %>
+	<% end %>
+<% end %>
+  

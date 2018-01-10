@@ -1,0 +1,451 @@
+<head>
+  <meta charset='utf-8' />  
+  <%= stylesheet_link_tag wicked_pdf_asset_base64("pdf") %>
+  <%= javascript_include_tag wicked_pdf_asset_base64("myjs") %>
+</head>
+
+<div class="margin_pdf">
+  <h4 class="centrate"><strong><u>Datos del Empleado</u></strong></h4>
+  <div class="container panel_button">
+    <div class="panel panel-default">
+      <div class="panel-heading">Datos Contacto</div>
+      <div class="panel-body ">
+      <!-- opcion con avatar-->
+        <div class="row">
+          <div class="col-md-3">
+            <% unless @employee.avatar.blank? %>
+              <%= wicked_pdf_image_tag  @employee.avatar  %>
+            <%else%> 
+              <%= wicked_pdf_image_tag  'users/default_avatar.png', size:"150"  %>
+            <%end%>
+          </div>
+          <div class="col-md-9">
+            <div class="col-md-4">
+              <div class="form-group">
+                <small><strong>Legajo: </strong>
+                <%= @employee.legajo %></small> 
+              </div>
+            </div>
+          <div class="col-md-8 sinpadding">
+            <div class="form-group">
+              <small><strong>Apellido y Nombre: </strong>
+              <%= @employee.last_name %>,  <%= @employee.name %></small>                                 
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">                          
+              <small><strong>Tipo y Numero Documento: </strong>
+              <%= @employee.document_type %> - <%= @employee.document_number %></small>                      
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="form-group">
+              <small><strong>Email: </strong>
+              <%= @employee.email %></small>                          
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <small><strong>CUIL: </strong>
+              <%= @employee.cuil %></small>                          
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">                       
+              <small><strong>Celular: </strong>
+              <%= @employee.tel_cel %></small>                       
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">                       
+              <small><strong>Tel.: </strong>
+              <%= @employee.tel_home %></small>                       
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">                        
+              <small><strong>Otro telefono: </strong>
+              <%= @employee.other_tel %></small>                      
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">                       
+              <small><strong>Estado Civil: </strong>
+              <%= @employee.marital_state %></small>                       
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <small><strong>Edad: </strong></small>  
+              <%= @edad%>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+      <!-- end opcion con avatar-->
+
+      <!-- ***address*** -->
+      <%@employee.addresses.each do |domicilio|%>
+        <% if domicilio.actual == true %>
+          <fieldset class="scheduler-border">
+          <legend class="scheduler-border">Domicilio</legend>
+            <div class="row"><!--row #7 -->
+              <div class="col-md-6 ">
+                <div class="field">
+                  <div class="form-group">
+                    <small><strong>Avenida - Calle: </strong>
+                    <%= domicilio.address_street %></small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="field">
+                  <div class="form-group">
+                    <small><strong>Numero: </strong>
+                    <%= domicilio.address_number %></small>
+                  </div>
+                </div>
+              </div>
+            </div><!--end row#7-->
+            <div class="row"><!--row #8-->
+              <div class="col-md-4">
+                <div class="field">
+                  <div class="form-group">
+                    <small><strong>Piso: </strong>
+                    <small></small> <%= domicilio.address_floor %></small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="field">
+                  <div class="form-group">
+                    <small><strong>Número de Departamento: </strong>
+                    <%= domicilio.address_floor_apartment_number %></small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="field">
+                  <div class="form-group">
+                    <small><strong>Número Monoblock: </strong>
+                    <%= domicilio.address_monoblock %></small> 
+                  </div>
+                </div>
+              </div>
+            </div><!--end row#8 -->
+            <div class="row"><!--row #9 -->
+              <div class="col-md-12">
+                <div class="field">
+                  <div class="form-group">
+                    <small><strong>Barrio: </strong>
+                    <%= domicilio.neighborhood %></small>
+                  </div>
+                </div>
+              </div>
+            </div><!--end row#9 -->
+            <div class="row"><!-- row#10 -->
+              <div class="col-md-4">
+                <div class="field">
+                  <div class="form-group">
+                    <small>
+                      <strong>Pais: </strong> 
+                      <%= domicilio.country.present? ? domicilio.country.name : "-"%>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="field">
+                  <div class="form-group">
+                    <small>
+                      <strong>Provincia: </strong>
+                      <%= domicilio.state.present? ? domicilio.state.name : "-" %>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="field">
+                  <div class="form-group">
+                    <small>
+                      <strong>Ciudad: </strong>
+                      <%= domicilio.city.present? ? domicilio.city.name : "-" %>
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div><!-- end row#10 -->
+          </fieldset> 
+        <%end%>                
+      <%end%>
+      <!-- end address -->
+    </div>
+  </div>
+
+  <!-- Registros Laborales -->
+  <% if params[:laboral] %>
+    <% @employee.labors.each do |labor| %>
+      <% if labor.status != 'Inactivo' %> <!-- Solo se imprimirá los registros en Labor que estén activos -->
+        <div class="panel panel-default break_page">
+          <div class="panel-heading">Datos Laborales</div>
+          <div class="panel-body">
+            <fieldset class="scheduler-border">
+              <legend class="scheduler-border">Activo</legend>              
+              <div class="container">
+                <div class="row">
+                  <div class="field">
+                    <small>
+                      <div class="col-md-4"><strong>Régimen de Contratación: </strong></div>
+                      <div class="col-md-8"><%= labor.contracting_regime.present? ? labor.contracting_regime : "-" %></div>
+                    </small>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="field">
+                    <small>
+                      <div class="col-md-4"><strong>Fecha de Alta: </strong></div>
+                      <div class="col-md-2"><%= labor.entry_date.present? ? labor.entry_date.strftime("%d/%m/%Y") : "-" %></div>
+                      <div class="col-md-4"><strong>Fecha de Baja: </strong></div>
+                      <div class="col-md-2"><%= labor.departure_date.present? ? labor.departure_date.strftime("%d/%m/%Y") : "-" %></div>                      
+                    </small>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="field">
+                    <small>
+                      <div class="col-md-4"><strong>Fecha de Baja Indefinida: </strong></div>
+                      <div class="col-md-8"><%= labor.departure_date_indefinite.present? ? "Si" : "-" %></div>
+                    </small>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="field">
+                    <small>
+                      <div class="col-md-4"><strong>Adscrito a otro Organismo: </strong></div>
+                      <div class="col-md-8"><%= labor.adscribed.present? ? labor.adscribed : "-" %></div>                      
+                    </small>
+                  </div>
+                </div>
+                
+                <!-- Function/Department/Direction/General_Direction -->
+                <hr>
+                <div class=""> <!-- container function/department/direction/general_direction -->
+                  <div class="row">
+                    <div class="field">
+                      <small>
+                        <div class="col-md-4"><strong>Función: </strong></div>
+                        <div class="col-md-8"><%= labor.function.present? ? labor.function.name : "-" %></div>
+                      </small>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="field">
+                      <small>
+                        <div class="col-md-4"><strong>Departamento: </strong></div>
+                        <div class="col-md-8"><%= labor.department.present? ? labor.department.name : "-" %></div>
+                      </small>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="field">
+                      <small>
+                        <div class="col-md-4"><strong>Dirección: </strong></div>
+                        <div class="col-md-8"><%= labor.direction.present? ? labor.direction.name : "-" %></div>
+                      </small>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="field">
+                      <small>
+                        <div class="col-md-4"><strong>Dirección General: </strong></div>
+                        <div class="col-md-8"><%= labor.general_direction.present? ? labor.general_direction.name : "-" %></div>
+                      </small>
+                    </div>
+                  </div>
+                </div> <!-- end container -->                
+                <hr>
+                <!-- **END** Function/Department/Direction/General_Direction -->
+
+                <div class="row">
+                  <div class="field">
+                    <small>
+                      <div class="col-md-4"><strong>Toma de Posesión: </strong></div>
+                      <div class="col-md-4"><%= labor.takeover.present? ? labor.takeover : "-" %></div>
+                      <div class="col-md-4"><%= labor.takeover_date.present? ? labor.takeover_date.strftime("%d/%m/%Y") : "-" %></div>
+                    </small>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="field">
+                    <small>
+                      <div class="col-md-4"><strong>Instrumento Legal: </strong></div>
+                      <div class="col-md-8"><%= labor.legal_instrument.present? ? labor.legal_instrument : "-" %></div>
+                    </small>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="field">
+                    <small>
+                      <div class="col-md-4"><strong>Categoría: </strong></div>
+                      <div class="col-md-8"><%= labor.category.present? ? labor.category : "-" %></div> 
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <!-- Datos Clínicos -->
+  <% if params[:medico] && @employee.clinical.present? %>
+    <div class="panel panel-default break_page">
+      <div class="panel-heading">Datos Básicos Clínicos</div>
+      <div class="panel-body">
+        <div class="container">          
+          <div class="row">
+            <div class="field">
+              <small>
+                <div class="col-md-4"><strong>Nombre de Contacto: </strong></div>
+                <div class="col-md-8"><%= @employee.clinical.name_contact.present? ? @employee.clinical.name_contact : "-" %></div>
+              </small>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <small>
+                <div class="col-md-4"><strong>Teléfono de Emergencia: </strong></div>
+                <div class="col-md-8"><%= @employee.clinical.tel_emergency.present? ? @employee.clinical.tel_emergency : "-" %></div>
+              </small>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <small>
+                <div class="col-md-4"><strong>Obra Social: </strong></div>
+                <div class="col-md-8"><%= @employee.clinical.name_social_work.present? ? @employee.clinical.name_social_work : "-" %></div>
+              </small>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <small>
+                <div class="col-md-4"><strong>Número de Afiliado: </strong></div>
+                <div class="col-md-8"><%= @employee.clinical.number_partner.present? ? @employee.clinical.number_partner : "-" %></div>
+              </small>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <small>
+                <div class="col-md-4"><strong>Tipo de Sangre: </strong></div>
+                <div class="col-md-8"><%= @employee.clinical.blood_type.present? ? @employee.clinical.blood_type : "-" %></div>
+              </small>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <small>
+                <div class="col-md-4"><strong>Alergias: </strong></div>
+                <div class="col-md-8"><%= @employee.clinical.allergies.present? ? @employee.clinical.allergies : "-" %></div>
+              </small>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <small>
+                <div class="col-md-4"><strong>Conclusiones: </strong></div>
+                <div class="col-md-8"><%= @employee.clinical.conclusion.present? ? @employee.clinical.conclusion : "-" %></div>
+              </small>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <small>
+                <div class="col-md-4"><strong>Profesional Actuante: </strong></div>
+                <div class="col-md-8"><%= @employee.clinical.profesional_actuante.present? ? @employee.clinical.profesional_actuante : "-" %></div>
+              </small>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  <% end %> <!-- end Datos Clinicos -->
+
+  <% if params[:familia] %>
+    <% @employee.family_groups.each do |family_group| %>
+      <div class="panel panel-default break_page">
+        <div class="panel-heading">Grupo Familiar</div>
+        <div class="panel-body">
+          <fieldset class="scheduler-border">
+            <legend class="scheduler-border"><%= family_group.family_ties %></legend>
+            <div class="container">
+
+              <div class="row">
+                <div class="field">
+                  <small>
+                    <div class="col-md-4"><strong>Apellido y Nombre: </strong></div>
+                    <div class="col-md-8">
+                      <%= family_group.last_name.present? ? family_group.last_name : "-" %>
+                      <%= family_group.name.present? ? family_group.name : "-" %>
+                    </div>
+                  </small>
+                </div>
+              </div>
+              <div class="row">
+                <div class="field">
+                  <small>
+                    <div class="col-md-4"><strong>Número de DNI: </strong></div>
+                    <div class="col-md-8">
+                      <%= family_group.document_numbre.present? ? family_group.document_numbre : "-" %>
+                    </div>
+                  </small>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="field">
+                  <small>
+                    <div class="col-md-4"><strong>Número de CUIL: </strong></div>
+                    <div class="col-md-8">
+                      <%= family_group.cuil.present? ? family_group.cuil : "-" %>
+                    </div>
+                  </small>
+                </div>
+              </div>
+              <div class="row">
+                <div class="field">
+                  <small>
+                    <div class="col-md-4"><strong>Fecha de Nacimiento: </strong></div>
+                    <div class="col-md-8">
+                      <%= family_group.Birthday.present? ? family_group.Birthday.strftime("%d/%m/%Y") : "-" %>
+                    </div>
+                  </small>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="field">
+                  <small>
+                    <div class="col-md-4"><strong>Edad: </strong></div>
+                    <div class="col-md-8">
+                      <%= family_group.Birthday.present? ? get_age(family_group.Birthday) : '' %>
+                    </div>
+                  </small>
+                </div>
+              </div>
+
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+  </div> <!-- end container panel_button -->
+</div> <!-- end margin_pdf -->

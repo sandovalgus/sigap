@@ -1,0 +1,29 @@
+<% content_for :title, "Perfil de Usuario" %>
+<div class="col-md-1 no-margin"></div>
+<div class="col-md-8 no-margin">
+	<div class="container">
+		<div class="row">
+		  <div class="col-sm-6 col-md-4">
+		    <div class="thumbnail">
+		    	<% if @user.avatar != nil%>                 
+			        <%= image_tag(@user.avatar.url, class: "img-circle", alt:"img-avatar", size:"70")%>
+			    <%else%>
+			        <%=image_tag("users/avatar_menu.png", alt:"avatar_menu", size:"70")%>  
+			    <%end%>
+			    <div class="caption">
+				    <h3 style="text-align:center;">
+				    	<%= @user == @current_user ? "Mi Perfil" : "Perfil de Usuario" %>
+				    </h3><br>
+				    <p><%= @user.last_name %> <%= @user.first_name %></p>
+				    <p><%= @user.email %></p>
+				    <%= @user.permission_level %><br>
+				    <p style="text-align:center;">
+						<%= link_to 'Actualizar mis datos', edit_user_registration_path, :class => 'btn btn-primary', :role => 'button' %>
+					</p>
+			    </div>
+		    </div>
+		  </div>
+		</div>
+	</div>	
+</div>
+<div class="col-md-1 no-margin"></div>

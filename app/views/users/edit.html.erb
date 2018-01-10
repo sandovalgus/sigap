@@ -1,0 +1,116 @@
+<% content_for :title, "Editar usuario - Sicof" %>
+<div class="col-md-1 no-margin"></div>
+<div class="col-md-8 no-margin">
+  <div class="panel panel-primary">
+  <div class="panel-heading">Editar usuario</div>
+  <div class="panel-body">
+    <%= form_for(@user) do |f| %>
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="nav nav-pills" id="pills_menu">
+          <li class="active"><a data-toggle="pill" href="#about">Datos Personales</a></li>
+          <li><a data-toggle="pill" href="#acount">Datos de la Cuenta</a></li>
+        </ul>    
+      </div>
+    </div>
+    
+
+    <div class="tab-content">
+          <div id="about" class="tab-pane fade in active">
+            <div class="row">
+              <div class="col-md-6 avatar_sign_up">
+                <% if @user.avatar != nil%>                 
+                  <%= image_tag(@user.avatar.url, class: "img-circle", alt:"avatar_menu", size:"100")%>
+                <%else%>
+                  <%=image_tag("users/avatar_menu.png", alt:"avatar_menu", size:"100")%>  
+                <%end%>
+                <br><%= f.label :avatar, "Foto de Perfil" %>
+                <%= f.file_field :avatar, class: "btn btn-default"%> 
+              </div>
+
+              <div class="col-md-6">
+                <div class="field">
+                  <div class="form-group">
+                    <%= f.label :first_name, "Nombre/s:"%>
+                    <%= f.text_field :first_name, autofocus: true, required: false, :class=>"form-control input-md", placeholder: "Nombre/s" %>
+                  </div>
+                </div>          
+                <div class="field">
+                    <div class="form-group">
+                      <%= f.label :last_name, "Apellido/s:"%>
+                      <%= f.text_field :last_name, autofocus: true, required: false, :class=>"form-control input-md", placeholder: "Apellido/s" %>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <!-- <a href="#acount" data-toggle="pill" class="btn btn-success" role="button">Siguiente</a> -->
+                <div class="btn-group btn-group-justified">
+                  <a href="#" data-toggle="pill" class="btn btn-default" style="visibility: hidden;">Atrás</a>
+                  <a href="#acount" data-toggle="pill" class="btn btn-success">Siguiente</a>
+                </div>  
+              </div>        
+            </div><!--  fin row botones -->
+          </div>
+        
+
+        <div id="acount" class="tab-pane fade">
+          <div class="col-md-6">
+              <div class="form-group">
+                <div class="field">
+                  <%= f.label :email %><br />
+                  <%= f.email_field :email, autofocus: true, disabled: true%>
+                </div>
+                <div class="field">
+                  <%= f.label :password, "Contraseña" %>
+                  <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length %> caracteres como mínimo)</em>
+                  <% end %><br />
+                  <%= f.password_field :password, autocomplete: "off" %>
+                </div>
+
+                <div class="field">
+                  <%= f.label :password_confirmation, "Confirmación de contraseña" %><br />
+                  <%= f.password_field :password_confirmation, autocomplete: "off" %>
+                </div>
+                <div class="field">
+                  <%= f.label :current_password, "Contraseña actual" %> <i>(Necesitamos tu contraseña actual para confirmar tus cambios)</i><br />
+                  <%= f.password_field :current_password, autocomplete: "off" %>  
+                </div>
+                <div class="field">
+                  <% roles = {'Normal' => '0', 'Administrador' => '1', 'Super Usuario' => '2'} %>
+                  <label>Roles</label>
+                  <fieldset>
+                    <% lista = roles.sort %>
+                    <% lista.each do |rol| %>
+                      <%= f.radio_button :permission_level, rol[1] %>
+                      <label for="<%= rol[1] %>"><%= rol[0] %></label><br>
+                    <% end %>
+                  </fieldset>
+                </div>
+                
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6" id="col_sin_padding_1">
+                  <a href="#about" data-toggle="pill" class="btn btn-default btn-block">Atrás</a>
+                </div>
+                <div class="col-md-6" id="col_sin_padding_2">
+                  <%= f.submit "Actualizar usuario", class: 'btn btn-success btn-block'%>
+                </div>
+              </div>
+              </div>        
+          </div><!--  fin row botones -->
+        </div>
+
+      </div><!--  Fin de la clase tab-content -->
+    
+    <% end %>
+  </div>
+</div>
+
+</div>
+<div class="col-md-1 no-margin"></div>

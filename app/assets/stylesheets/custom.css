@@ -1,0 +1,203 @@
+.clearfix:after, form:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden; } 
+
+.page-title {
+  width: 100%;
+  height: 65px;
+  padding: 10px 0; }
+
+.page-title .title_left {
+  width: 45%;
+  float: left;
+  display: block; }
+
+.page-title .title_left h3 {
+  margin: 9px 0; }
+
+.page-title .title_right {
+  width: 55%;
+  float: left;
+  display: block; }
+
+.page-title .title_right .pull-right {
+  margin: 10px 0; }
+
+  .x_panel {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px 17px;
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #E6E9ED;
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+  column-break-inside: avoid;
+  opacity: 1;
+  transition: all .2s ease; }
+
+.x_title {
+  border-bottom: 2px solid #E6E9ED;
+  padding: 1px 5px 6px;
+  margin-bottom: 10px; }
+
+  .x_title h2 {
+  margin: 5px 0 6px;
+  float: left;
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; }
+
+.x_title h2 small {
+  margin-left: 10px; }
+
+.x_content {
+  padding: 0 5px 6px;
+  position: relative;
+  width: 100%;
+  float: left;
+  clear: both;
+  margin-top: 5px; }
+
+.profile_details .profile_left {
+  background: white; }
+
+.profile_left h3{
+  margin-left: 10%;
+}
+
+
+  .img-circle.profile_img {
+  width: 70%;
+  background: #fff;
+  margin-left: 15%;
+  z-index: 1000;
+  position: inherit;
+  margin-top: 20px;
+  border: 1px solid rgba(52, 73, 94, 0.44);
+  padding: 4px; }
+
+  .profile_title {
+  background: #F5F7FA;
+  border: 0;
+  padding: 7px 0;
+  display: -ms-flexbox;
+  display: flex; }
+
+.main_container .top_nav {
+  display: block;
+  margin-left: 230px; }
+
+  body {
+  padding-top:70px;
+}
+
+.btn_out{
+  
+  margin-right: 4px;
+}
+
+.empleadostable{
+  margin-top: 5px;
+}
+
+.dataTables_length, .dataTables_info{
+  margin-left: 20px !important;
+}
+
+/*listado de empleado PDF*/
+
+.pdfList th{
+  font-size: 13px;
+  text-align: center;
+  color: #FFFFFF;
+}
+.pdfList td{
+  font-size: 12px;
+}
+.pdfList thead{
+  background: #337AB7;
+    } 
+.pdfList .titulo{
+  text-decoration: underline;
+  font-size: 18px;
+  text-align: center;
+  margin-top: -20px;
+    } 
+
+.print_list{  
+  margin-top: -5px !important;
+  border-radius: 50px !important;
+}
+
+.print_list:hover{
+    background: #337AB7 !important;
+    color: white !important;
+}
+
+.listModal{
+  padding-left:  200px !important;
+  padding-right: 200px !important;
+}
+
+.search_emp{
+  width: 600px!important;
+}
+  .view-home{
+  margin: 20px;
+    }
+.pf-value{
+display: inline;
+}
+
+.porcentaje-total{
+  border: 1px solid #E22222;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.area-text{
+  width: 100% !important;
+  background: #F5F5F5 !important;
+  height: 80px !important;
+  padding: 10px !important;
+  border-radius: 5px;
+}
+
+.civil_state:hover{
+  background-color: white;
+  color: black;
+}
+
+.btn-table-users .btn-default{
+  margin-top: -4px !important;
+  border-radius: 50px !important;
+
+}
+.btn-no-load {
+  opacity: 0.5 !important;
+}
+
+
+.btn-load{
+   color: #7fbb00 !important;
+}
+ .btn-table-users .btn-load:hover{
+   color: white !important;
+   background-color: #7fbb00 !important;
+}
+
+ 
+.btn-table-users .btn:hover{
+  margin-top: -4px !important;
+  border-radius: 50px !important;
+  background: #C0C5CD !important;
+}
+
+ 

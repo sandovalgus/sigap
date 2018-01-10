@@ -1,0 +1,28 @@
+<!-- Vista parcial donde se muestra los hijos de empleados que estan proximos a cumplir la mayoria de edad. -->
+<div class="panel-body">
+    <small><p>Hijos de empleados, próximos a cumplir la mayoria de edad.</p></small>
+</div>
+<table class="table table-condensed max-height-200 overflow">
+	<tbody>
+		<% @full_age.map { |obj| %>
+			<tr class="warning">
+				<td>
+					<small><strong>
+						<%=obj.last_name%>, <%=obj.name%>
+					</strong></small><br>
+					<small class="text-muted">
+						<abbr title="Empleado"><%=obj.employee.last_name%>, <%=obj.employee.name%>/<%=obj.employee.legajo%></abbr>
+					</small>
+				</td>
+				<td>
+					<small>
+          				<%= obj.Birthday != nil ? (obj.Birthday.strftime "%d/%b") : '' %>
+         			</small>
+             	</td>
+             	<td>
+					<%= link_to '<i class="fa fa-arrow-right" aria-hidden="true"></i>'.html_safe, family_group_path(obj, :object => obj.id), data: {modal: true} %> 
+             	</td>
+			</tr>
+		<% } %>
+	</tbody>
+</table>

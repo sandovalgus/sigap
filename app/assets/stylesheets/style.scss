@@ -1,0 +1,275 @@
+@charset "UTF-8";
+
+.container-fluid {
+  margin-left: -1.8% !important;
+}
+
+// .navbar-custom {
+//   color: #ffffff;
+// }
+
+
+// .navbar-fixed-left {
+//   width: auto;
+//   position: fixed !important;
+//   min-height: 100% !important;
+//   padding-top: 25px !important;
+//   padding: 0px;
+//   overflow: hidden;
+// }
+
+
+// .navbar-fixed-left .navbar-nav > li {
+//   float: none;
+//   /* Cancel default li float: left */
+//   width: 220px;
+//   width: 100%;
+//   background-color: #fff;
+//   border: 1px solid #dedede;
+//   border-radius: 4px;
+//   box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.055);
+//   /*color: #888;*/
+// }
+
+
+// .navbar-fixed-left .navbar-nav > li > .dropdown-menu {
+//   margin-top: -50px;
+//   margin-left: 140px;
+// }
+
+
+#div_logo_sipted {
+  /*border-style: solid;*/
+  margin-right: 0px;
+  padding-right: 0px;
+  border-right: solid;
+}
+
+.img_logo_sipted {
+  background-size: auto;
+}
+
+
+/*Imagen avatar del show User*/
+.avatar_sign_up {
+  border-right: solid;
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+#session_end {
+  margin-top: 50px auto;
+}
+
+/*Avatar de la tabla*/
+.img-avatar {
+  margin: 0px;
+}
+
+/*Avatar del menu*/
+.img-avatar-menu {
+  margin: 5px;
+}
+
+.employee-header{
+  padding: 13px;
+  float: left;
+}
+
+.border{
+  border-style: inset;
+  margin-bottom: 20px;
+}
+/*Posicionar el menu vertical y el contenido*/
+.menu_left {
+  margin-top: 5%;
+}
+
+.dataTables_filter {
+  display: none;
+}
+
+/*Menu horizontal*/
+// .nav_horizontal {
+//   background-color: white !important;
+// }
+
+// .nav_horizontal ul.nav a:hover {
+//   color: white !important;
+// }
+
+/*Menu vertical*/
+// .nav_vertical ul.nav a:hover {
+//   color: white;
+// }
+
+/*Posición y tamaño del contenido*/
+.contenido {
+  margin-top: 1%;
+}
+
+/*Posicion y tamaño de la barra de mensajes*/
+.messages {
+  display: block;
+  visibility: visible;
+  background-color: white;
+  height: 50px;
+  width: 100%;
+}
+
+/*Imagen en el menu horizontal*/
+.image_nav {
+  min-height: 141px;
+  width: auto;
+}
+
+/*Formulario del login*/
+
+//Letras del logo SIPTED
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:600');
+#letter_for_login {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 4em;
+}
+
+.form_sign_in {
+  margin: 0px;
+  padding: 0px;
+}
+
+.no-margin-login {
+  margin: 15%;
+}
+
+ul#ejm2 li a {
+  position: relative;
+  font-weight: bold;
+  color: #0E83CD;
+  margin: 0px 5px;
+}
+
+ul#ejm2 li a:after {
+  position: absolute;
+  bottom: 7px;
+  left: 0px;
+  width: 100%;
+  height: 4px;
+  background-color: blue;
+  content: "";
+  opacity: 0;
+  transition: opacity 0.3s ease 0s, transform 0.3s ease 0s;
+  transform: translateY(20px);
+}
+
+ul#ejm2 li a:hover:after {
+  opacity: 1;
+  transform: translateY(15px);
+}
+
+.texto-izq {
+  text-align: left !important;
+}
+
+.bordes {
+  border-style: inset;
+  margin-bottom: 4%;
+}
+
+.sipted img {
+  margin-top: -45px;
+  margin-right: 30px;
+}
+
+
+/* Windows Minimize Div */
+#widnow{
+    width:400px;
+    border:solid 1px;
+    margin-botton: 5px;
+    padding-botton : 5px;
+}
+
+#title_bar{
+    background: #FEFEFE;
+    height: 25px;
+    width: 100%;
+    border-bottom: 1px solid;
+}
+#buttones{
+/*  border:solid 1px; */
+    width: 25px;
+    height: 25px;
+    float:right;
+    padding: 1px 1px 1px 10px;
+    cursor:pointer;
+}
+#box{
+    display: none;
+    height: 30px;
+    background: #DFDFDF;
+}
+
+/* ******* END Windows Minimize Div */
+
+/*fieldset.scheduler-border {
+  border: 1px groove #ddd !important;
+  padding: 0 1.4em 1.4em 1.4em !important;
+  margin: 0 0 1.5em 0 !important;
+  -webkit-box-shadow:  0px 0px 0px 0px #000;
+          box-shadow:  0px 0px 0px 0px #000;
+}
+
+legend.scheduler-border {
+  font-size: 1.2em !important;
+  font-weight: bold !important;
+  text-align: left !important;
+  width:auto;
+  padding:0 10px;
+  border-bottom:none;
+}*/
+
+select.width-100{
+  width: 100% !important;
+}
+
+
+/*Ver mas texto*/
+/*a {
+  color: #0254EB
+}
+a:visited {
+  color: #0254EB
+}*/
+a.morelink {
+  text-decoration:none;
+  outline: none;
+}
+a.morelink:hover{
+  color: white;
+  background-color: grey;
+}
+.morecontent span {
+  display: none;
+}
+.comment {
+  width: 240px;
+  background-color: #f0f0f0;
+  margin-top: 10px;
+}
+
+.col-centered {
+  margin-right: 10px !important;
+  margin-left: 10px !important;
+}
+
+.overflow {
+  overflow-y: auto;
+  display: block;
+  &.max-height-200 {
+    max-height: 200px;
+  }
+  &.max-height-100 {
+    max-height: 100px;
+  }
+}

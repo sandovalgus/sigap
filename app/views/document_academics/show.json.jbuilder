@@ -1,0 +1,1 @@
+json.partial! "document_academics/document_academic", document_academic: @document_academic

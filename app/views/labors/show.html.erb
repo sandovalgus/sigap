@@ -1,0 +1,198 @@
+<% content_for :title, "Registro Laboral" %>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="field">
+      <div class="form-group">
+        <%= @labor.permanent_plant_pass ? '<strong>Este registro corresponde a un Pase a Planta Permanente</strong>'.html_safe : '' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="field">
+    <div class="form-group">
+      <div class="col-md-4">¿Adscrito a otro Organismo?</div>
+      <div class="col-md-4"><%= @labor.adscribed ? '<strong>Si</strong>'.html_safe : '<strong>No</strong>'.html_safe %></div>
+    </div>
+  </div>
+</div>
+<hr>
+
+<div class="row">
+  <div class="field">
+    <div class="col-md-3">Función: </div>
+    <div class="col-md-9">
+      <ul style="list-style-type: none;">
+        <li><strong><%= @labor.function.present? ? @labor.function.name : '-' %></strong>
+          <ul style="list-style-type: none;">
+            <li>└&nbsp;<strong class="text-muted"><%= @labor.department.present? ? @labor.department.name : '-' %></strong>
+              <ul style="list-style-type: none;">
+                <li>└&nbsp;<strong class="text-muted"><%= @labor.direction.present? ? @labor.direction.name : '-' %></strong>
+                  <ul style="list-style-type: none;">
+                    <li>└&nbsp;<strong class="text-muted"><%= @labor.general_direction.present? ? @labor.general_direction.name : '-' %></strong></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>      
+    </div>
+  </div>
+</div>
+
+<!-- <div class="row">
+  <div class="field">
+    <div class="form-group">
+      <div class="col-md-4">Función:</div>
+      <div class="col-md-4"><strong><%= @labor.function.present? ? @labor.function.name : '-' %></strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="field">
+    <div class="form-group">
+      <div class="col-md-4">Departamento:</div>
+      <div class="col-md-4"><strong><%= @labor.department.present? ? @labor.department.name : '-' %></strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="field">
+    <div class="form-group">
+      <div class="col-md-4">Dirección:</div>
+      <div class="col-md-4"><strong><%= @labor.direction.present? ? @labor.direction.name : '-' %></strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="field">
+    <div class="form-group">
+      <div class="col-md-4">Dirección General:</div>
+      <div class="col-md-4"><strong><%= @labor.general_direction.present? ? @labor.general_direction.name : '-' %></strong></div>
+    </div>
+  </div>
+</div> -->
+
+<div class="row">
+  <div class="field">
+    <div class="form-group">
+      <div class="col-md-4">Régimen de Contratación:</div>
+      <div class="col-md-4"><strong><%= @labor.contracting_regime.present? ? @labor.contracting_regime : '-' %></strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="field">
+    <div class="form-group">
+      <div class="col-md-4">Estado:</div>
+      <div class="col-md-4"><strong><%= @labor.status %></strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="field">
+    <div class="form-group">
+      <div class="col-md-4">Fecha de Alta:</div>
+      <div class="col-md-4"><strong><%= @labor.entry_date.present? ? @labor.entry_date.strftime("%d/%m/%Y") : '-' %></strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="field">
+    <div class="form-group">
+      <div class="col-md-4">¿Fecha de baja indefinida?</div>
+      <div class="col-md-4"><%= @labor.departure_date_indefinite ? '<strong>Si</strong>'.html_safe : '<strong>No</strong>'.html_safe %></div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="field">
+    <div class="form-group">
+      <div class="col-md-4">Fecha de Baja:</div>
+      <div class="col-md-4"><strong><%= @labor.departure_date.present? ? @labor.departure_date.strftime("%d/%m/%Y") : '-' %></strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="row">
+  <div class="field">
+    <div class="form-group">
+      <div class="col-md-4">Toma de posesión:</div>
+      <div class="col-md-4"><strong><%= @labor.takeover.present? ? @labor.takeover : '-' %></strong></div>
+    </div>
+  </div>
+</div> -->
+
+<div class="row">
+  <div class="field">
+    <div class="form-group">
+      <div class="col-md-4">Toma de posesión:</div>
+      <div class="col-md-4"><strong><%= @labor.takeover_date.present? ? @labor.takeover_date.strftime("%d/%m/%Y") : '-' %></strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="field">
+    <div class="form-group">
+      <div class="col-md-4">Instrumento Legal:</div>
+      <div class="col-md-4"><strong><%= @labor.legal_instrument.present? ? @labor.legal_instrument : '-' %></strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="field">
+    <div class="form-group">
+      <div class="col-md-4">Categoria:</div>
+      <div class="col-md-4"><strong><%= @labor.category.present? ? @labor.category : '-' %></strong></div>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<!-- Documentos Adjuntos -->
+<% if @labor.attachment_files.present? %>
+  <div class="panel panel-default">
+      <div class="panel-heading">Documentos Adjuntos</div>                        
+          <div class="row">
+              <div class="col-md-12">
+                  <field>
+                      <table class="table table-striped">
+                          <thead>
+                              <th></th>
+                              <th>Nombre</th>
+                              <th>Comentario</th>
+                              <th>Subido</th>
+                          </thead>
+                          <tbody>
+                              <% @labor.attachment_files.each do |attachment| %>
+                                  <tr>
+                                      <td><%= link_to '<i class="fa fa-paperclip" aria-hidden="true"></i>'.html_safe, attachment.document_url,  :target => "_blank", class: "btn btn-default btn-xs"%></td>
+                                      <td><%= attachment.name %></td>
+                                      <td><%= attachment.commentary %></td>
+                                      <td><%= attachment.created_at %></td>
+                                  </tr>
+                              <%end%>
+                          </tbody>
+                      </table>
+                  </field>
+          </div> <!-- end row documentos adjuntos -->
+      </div>
+  </div> <!-- end panel documentos adjuntos  -->
+<% end %>
+
+<!-- 
+<%= link_to 'Edit', edit_labor_path(@labor) %> |
+<%= link_to 'Back', labors_path %> -->

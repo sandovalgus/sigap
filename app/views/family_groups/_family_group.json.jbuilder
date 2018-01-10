@@ -1,0 +1,2 @@
+json.extract! family_group, :id, :family_ties, :name, :last_name, :document_numbre, :cuil, :photocopy_document, :document, :created_at, :updated_at
+json.url family_group_url(family_group, format: :json)

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>General Directions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Direction</th>
+      <th>Department</th>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @general_directions.each do |general_direction| %>
+      <tr>
+        <td><%= general_direction.direction %></td>
+        <td><%= general_direction.department %></td>
+        <td><%= general_direction.name %></td>
+        <td><%= link_to 'Show', general_direction %></td>
+        <td><%= link_to 'Edit', edit_general_direction_path(general_direction) %></td>
+        <td><%= link_to 'Destroy', general_direction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New General Direction', new_general_direction_path %>

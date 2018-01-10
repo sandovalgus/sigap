@@ -1,0 +1,90 @@
+<%= form_for(@academic, :builder => Judge::FormBuilder, remote: request.xhr?, html: {:class => 'well form-horizontal', data: {modal: true} }) do |f| %>
+  <% if academic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(academic.errors.count, "error") %> prohibited this academic from being saved:</h2>
+
+      <ul>
+      <% academic.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="form-group">
+    <%= f.label :academic_training, '* Formación Académica: ', class: 'col-sm-4 control-label' %>
+    <div class="col-sm-8">
+      <%= f.select :academic_training, Academic.academic_training.options, {}, class: 'form-control width-100', include_blank: true %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :status, '* Estado: ', class: 'col-sm-4 control-label' %>
+    <div class="col-sm-8">
+      <%= f.select :status, Academic.status.options, {}, class: 'form-control width-100', include_blank: true, :onchange => 'habilitar(this.value);'%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :start_data, 'Desde el año: ', class: 'col-md-4 control-label' %>
+    <div class="col-sm-2">
+      <%= f.date_select :start_data, {:start_year => Time.now.year, :end_year => Time.now.year - 50, :discard_day => true, :discard_month => true}, {:class => "form-control"} %>  
+    </div>
+
+    <%= f.label :finish_data, 'Hasta el año: ', class: 'col-sm-4 control-label' %>
+    <div class="col-sm-2">
+      <%= f.date_select :finish_data, {:start_year => Time.now.year + 10, :end_year => Time.now.year - 50, :discard_day => true, :discard_month => true}, {:class => "form-control"} %>  
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <%= f.label :establishment, '* Establecimiento: ', class: 'col-sm-4 control-label' %>
+    <div class="col-sm-8">
+      <%= f.text_field :establishment, class: 'form-control', :required => true%>
+    </div> 
+  </div>
+
+  <div class="form-group">
+    <%= f.label :discipline, '* Disciplina/Orientación: ', class: 'col-sm-4 control-label' %>
+    <div class="col-sm-8">
+      <%= f.text_field :discipline, class: 'form-control', :required => true %>
+    </div> 
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description, 'Descripción: ', class: 'col-sm-4 control-label' %>
+    <div class="col-sm-8">
+      <%= f.text_area :description, rows: 5, class: 'form-control' %>
+    </div> 
+  </div>
+
+  <div class="form-group">
+    <label for="documents" class="col-sm-4 control-label">Documentos adjuntos: </label>
+    <div class="field col-sm-8">
+        <%= f.fields_for :document_academics do |document| %>
+          <%= render 'document_academic_fields', f: document %>
+        <%end%>
+        <%= link_to_add_fields 'Agregar Documento <i class="fa fa-plus fa-1x" aria-hidden="true"></i>'.html_safe, f, :document_academics %>
+    </div>
+  </div>
+
+  <div class="btn-action">
+    <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+      <i class="fa fa-floppy-o " aria-hidden="true"></i> Guardar
+    <% end %>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+  </div>
+<% end %>
+
+<script>
+  function habilitar(value){
+    if(value=='Completo' || value=='Incompleto'){
+      //Habilitado
+      document.getElementById('academic_finish_data_1i').disabled=false;
+    }else if(value=='En Curso'){
+      //Deshabilitado
+      document.getElementById('academic_finish_data_1i').disabled=true;
+    }
+  }
+</script>

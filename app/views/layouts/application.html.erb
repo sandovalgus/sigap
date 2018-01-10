@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% if content_for?(:title) %>
+      <%= content_for(:title) %>
+    <% else %>
+      <title>Sistema de Administración y Gestión de Personal | SIPTED</title>
+    <% end %>
+    <meta charset="UTF-8">
+    <%= favicon_link_tag 'logoLapiz2.png' %>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body id="<%= params[:controller].parameterize%>_controller ">
+    <% unless flash.empty? %>
+      <script type="text/javascript">
+        <% flash.each do |f| %>
+          <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info').gsub('success', 'success').gsub('warning', 'warning') %>
+         toastr['<%= type %>']('<%= f[1] %>');
+        <% end %>
+      </script>
+    <% end %>
+
+
+    <div class="container-fluid">
+      <% if user_signed_in? %>
+      <!-- menu principal, comun para todos los usuarios -->
+        <div class="row">
+          <div class="col-xs-3 col-md-12">
+            <%= render "partials/navbar" %>
+          </div>
+        </div>
+        <!-- fin menu principal -->
+        <!-- menu administrador--> 
+        <div class="view-home">
+          <!-- <div class="container-fluid"> -->
+          <!-- mensajes de error, confirmación y advertencias -->              
+          <!-- fin mensajes -->
+          <!-- contenido -->
+          <%= yield %>
+          <%# app/views/layouts/application.html.erb %>
+          <div id="modal-holder"></div>  
+          <!-- fin contenido -->
+          <!-- </div> -->
+        </div> 
+        <!-- fin menu principal -->
+      <% else %> <!-- no esta logeado -->         
+        <div class="col-md-12" id="session_end">  
+          <div class="col-md-10 col-md-offset-2">
+            <%= yield %>  
+          </div>
+        </div>
+      <% end %>
+    </div> <!-- End container-fluid -->    
+  </body>
+  <!-- Funcion desvanecedora de div's -->
+
+</html>
+    <script>
+      $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip(); 
+        $('#wizard').smartWizard();
+
+        $('#wizard_verticle').smartWizard({
+          transitionEffect: 'slide'
+        });
+
+        $('.buttonNext').addClass('btn btn-success');
+        $('.buttonPrevious').addClass('btn btn-primary');
+        $('.buttonFinish').addClass('btn btn-default');
+
+        });
+    </script>

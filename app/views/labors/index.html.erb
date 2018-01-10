@@ -1,0 +1,109 @@
+<div class="x_panel">
+    <div class="x_title">
+        <h2>Datos Laborales</h2>
+        <div class="btn-action">        
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" title="Agregar Datos Laborales"><i class="fa fa-plus" aria-hidden="true"></i> <i class="fa fa-briefcase" aria-hidden="true"></i>
+                </button>
+          
+              <%= link_to 'Volver <i class="fa fa-undo" aria-hidden="true"></i>'.html_safe,employee_path(@employee) , class: 'btn btn-default tag-tooltip', :data => {:toggle=>"tooltip"}, 'data-original-title' => "Volver"   %>  <span>
+        </div>  
+        <div class="clearfix"></div>
+    </div>
+
+
+  <div class="panel-body">
+    <div class="card-block">
+      <!-- Datos del empleado -->
+      <%= render "partials/header_employee"%>
+      <!-- Fin datos del empleado -->
+      <!-- Verificar si existe algun dato laboral para este empleado -->
+      <% if @labors.present? %> 
+      <!-- Laboral -->      
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Función</th>
+            <th>Departamento</th>
+            <th>Dirección</th>
+            <th>Organismo</th>
+            <th>Fecha de alta</th>
+            <th>Fecha de baja</th>
+            <th>Estado</th>
+            <th colspan="2">Acciones</th>
+          </tr>
+        </thead>
+        <% @labors.each do |labor| %>
+        <tbody>
+          <% if labor.status == "Activo" %>
+          <tr class="success">
+          <% else %>
+          <tr class="warning">
+          <% end %>
+            <% if labor.adscribed? %>
+              <td class="alert alert-warning" colspan="3"> Esta Función Pertenece a un Organismo Adscrito.</td>
+            <% else %>
+              <td><%= labor.function.present? ? labor.function.name : '-' %></td>
+              <td><%= labor.department.present? ? labor.department.name : '-' %></td>
+              <td><%= labor.direction.present? ? labor.direction.name : '-' %></td>
+            <% end %>
+            <td><%= labor.general_direction.present? ? labor.general_direction.name : labor.adscribed_organization_name %></td>
+            <td><%= labor.entry_date !=nil ? (labor.entry_date.strftime "%d/%m/%Y") : '' %></td>
+            <td><%= labor.departure_date !=nil ? (labor.departure_date.strftime "%d/%m/%Y") : '' %></td>
+            <td>
+              <% if labor.status == "Activo" %>
+              <button type="button" class="btn btn-success btn-sm" disabled="true">Activo</button>
+              <% else %>
+              <button type="button" class="btn btn-danger btn-sm" disabled="true">Inactivo</button>
+              <% end %>
+            </td>
+            <td>
+              <span>
+                <%= link_to '<i class="fa fa-eye" aria-hidden="true"></i>'.html_safe, labor_path(labor), data: { modal: true }, class: 'btn btn-default' %>
+              </span>
+            </td>
+            <td>
+              <span>
+                  <%= link_to '<i class="fa fa-pencil" aria-hidden="true"></i>'.html_safe, edit_labor_path(labor), data: { modal: true }, class: 'btn btn-default' %>
+              </span>              
+            </td>
+<!--               <span>
+               <% if labor.status == "Activo" %>
+                  <%= link_to '<i class="fa fa-minus-circle" aria-hidden="true"></i>'.html_safe, edit_labor_path(labor, :bandera=> 1), data: {modal: true}, class: 'btn btn-danger'%>
+
+                <% else %>
+                  <%= link_to '<i class="fa fa-plus-circle" aria-hidden="true"></i>'.html_safe, edit_labor_path(labor, :bandera=> 2), data: {modal: true}, class: 'btn btn-success'%>
+                <% end %>
+              </span>  -->
+          </tr>      
+        </tbody>
+        <%end%>
+      </table>
+    </div>
+    <!-- No existen datos laborales para este empleado -->
+    <% else %>
+      <fieldset class="msj-border">
+      <br/>
+        <div class="alert alert-warning">
+          <h3><strong>Aún no se a agregado ningun dato laboral</strong> <span class="label label-warning"><i class="fa fa-exclamation " aria-hidden="true"></i></span></h3>
+        </div>
+      </fieldset>
+    <% end %>
+  </div>
+</div>
+
+<!-- Modal New-->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Agregar datos laborales</h4>
+        </div>
+        <div class="modal-body">
+             <%= render 'form', labor: @labor %>
+        </div>
+      </div>
+      
+    </div>
+  </div>

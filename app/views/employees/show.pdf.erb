@@ -1,0 +1,551 @@
+
+  <head>
+    <meta charset='utf-8' />
+  
+   <%= stylesheet_link_tag wicked_pdf_asset_base64("pdf") %>
+   <%= javascript_include_tag wicked_pdf_asset_base64("myjs") %>
+  </head>
+      <div class="main_container">
+       
+
+        <div  role="main">
+          <div class="">
+            <div class="page-title">
+             
+
+              <div class="title_right">
+           
+            </div>
+            
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+
+                    <h2>Empleado del SiPTeD</h2>
+
+              
+                  
+
+
+
+
+
+                    <div class="clearfix">
+                   
+                     
+                    </div>
+                  </div>
+
+                  <div class="x_content">
+                   
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+
+                  
+
+                                       
+                      <div id="graph_bar" style="width:100%; height:280px;">
+                           <!-- datos del contacto-->
+                           <% if params[:contacto] %>
+                           <div id="contactopdf">
+                            <div class="panel panel-default" >
+                              <div class="panel-heading">Datos del Contacto</div>
+                              <div class="panel-body">
+                               
+                   
+
+                    <div class="row"><!--row#1 #2 -->
+                            <div class="col-md-6">
+                                    <div class="field">
+                                          <div class="form-group">
+                                            
+ 
+                                                  <strong>Apellido y Nombre:</strong>
+                                                  <%= @employee.last_name %>,  <%= @employee.name %> 
+                                              
+                                          </div>
+                                    </div>
+                            </div>
+                    
+
+                    </div><!--end row#2 -->
+
+
+                      <div class="row"><!--row #3 -->
+                          <div class="col-md-6">
+                              <div class="field">
+                                  <div class="form-group">
+                                      
+                                          <strong>Tipo y Numero documento:</strong>
+                                          <%= @employee.document_type %> - <%= @employee.document_number %>
+                                    
+                                  </div>
+                              </div>
+                          </div>
+                        
+        
+
+                    </div><!--end row#3 -->
+                              
+                    <div class="row"><!--row#4 -->
+                        <div class="col-md-6">
+                            <div class="field">
+                                <div class="form-group">
+                                    <strong>Email:</strong>
+                                        <%= @employee.email %>
+                                       
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="field">
+                                <div class="form-group">
+                                    
+                                         <strong>CUIL:</strong>
+                                        <%= @employee.cuil %>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--end row#4 -->
+
+
+                    <div class="row"><!--row #5 -->
+                        <div class="col-md-4">
+                            <div class="field">
+                                <div class="form-group">
+                                   
+                                        <strong>Celular:</strong>
+                                        <%= @employee.tel_cel %>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="field">
+                                <div class="form-group">
+                                    
+                                        <strong>Telefono casa:</strong>
+                                        <%= @employee.tel_home %>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="field">
+                                <div class="form-group">
+                                    
+                                        <strong>Otro telefono:</strong>
+                                        <%= @employee.other_tel %>
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--end row#5 -->
+                    <div class="row"><!--row #5-->
+                        <div class="col-md-6">
+                            <div class="field">
+                                <div class="form-group">
+                                   
+                                        <strong>Estado civil:</strong>
+                                        <%= @employee.marital_state %>
+                                  
+                                </div>
+                            </div>
+                        </div>
+                   
+                    </div><!--end row#5  -->
+                                
+                              </div>
+                            </div>
+                            </div><!-- contactos-->
+                            <%end%>
+                            <!-- fin bloque datos del contacto-->
+                            <!--  bloque domicilio del contacto-->
+                <% if params[:domicilio] %>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Domicilio</div>
+                          <div class="panel-body">
+                                    <div class="row"><!--row #7 -->
+    <div class="col-md-6 ">
+        <div class="field">
+            <div class="form-group">
+        
+ 
+  <strong>Avenida - Calle:</strong>
+  <%= @employee.address_street %>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="field">
+            <div class="form-group">
+          
+ 
+  <strong>Numero:</strong>
+  <%= @employee.address_number %>
+
+
+            </div>
+        </div>
+    </div>
+
+</div><!--end row#5
+  -->
+<div class="row"><!--row #8-->
+    <div class="col-md-4">
+        <div class="field">
+            <div class="form-group">
+           
+ 
+  <strong>Piso:</strong>
+  <%= @employee.address_floor %>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="field">
+            <div class="form-group">
+          
+ 
+  <strong>Numero de departamento:</strong>
+  <%= @employee.address_floor_apartment_number %>
+
+            </div>
+        </div>
+    </div>
+      <div class="col-md-4">
+        <div class="field">
+            <div class="form-group">
+       
+ 
+  <strong>Numero monoblock:</strong>
+  <%= @employee.address_monoblock %>
+
+            </div>
+        </div>
+    </div>
+
+</div><!--end row#8 -->
+<div class="row"><!--row #9 -->
+    <div class="col-md-12">
+        <div class="field">
+            <div class="form-group">
+           
+ 
+  <strong>Barrio:</strong>
+  <%= @employee.neighborhood %>
+            </div>
+        </div>
+    </div>
+
+</div><!--end row#9 -->
+  <div class="row"><!--end row#10 -->
+      <div class="col-md-6">
+        
+          <div class="field">
+            <div class="form-group">
+           
+ 
+  <strong>Ciudad:</strong>
+  <%= @employee.city %>
+
+            </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+         <div class="field">
+            <div class="form-group">
+          
+ 
+  <strong>Localidad:</strong>
+  <%= @employee.location %>
+
+
+            </div>
+        </div>
+      </div>
+   
+
+  </div><!--end row#10 -->
+  <div class="row"> <!-- row#11 --> 
+           <div class="col-md-6">
+        
+          <div class="field">
+            <div class="form-group">
+           
+ 
+  <strong>Provincia:</strong>
+  <%= @employee.state %>
+ 
+            </div>
+        </div>
+      </div>
+            <div class="col-md-6">
+        
+          <div class="field">
+            <div class="form-group">
+         
+ 
+  <strong>Pais:</strong>
+  <%= @employee.country %>
+
+
+            </div>
+        </div>
+      </div>
+  </div><!--end row#11 -->
+                          </div>
+                     </div>
+                     <%end%><!-- bloque domicilio print -->
+                            <!--  fin bloque domicilio del contacto-->
+            <!--  bloque laborales del contacto-->
+            <% if params[:laboral] %>
+              <div class="panel panel-default">
+                  <div class="panel-heading">Datos laborales</div>
+                    <div class="panel-body">
+                         <div class="row">
+          <div class="col-md-4">
+              <div class="field">
+                  <div class="form-group">
+
+                    
+ 
+                      <strong>Categoria:</strong>
+                      <%= @employee.category %>
+                    
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6">
+              <div class="field">
+                  <div class="form-group">
+                    
+ 
+                          <strong>Funcion:</strong>
+                          <%= @employee.function_employee %>
+                    
+                  </div>
+              </div>
+          </div>
+      </div>
+
+        <div class="row">
+              <div class="col-md-6">
+                  <div class="field">
+                    <div class="form-group">
+                      
+ 
+                            <strong>Relacion de dependencia:</strong>
+                            <%= @employee.relationship_of_dependency %>
+                      
+                    </div>
+                  </div>
+              </div>
+            <div class="col-md-6">
+              <div class="form-group">
+
+               
+              </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="field">
+                    <div class="form-group">
+                   
+ 
+                        <strong>Instrumento legal:</strong>
+                        <%= @employee.legal_instrument %>
+                     
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                   
+ 
+                      <strong>Making performance:</strong>
+                      <%= @employee.making_performance %>
+                
+
+                </div>
+            </div>
+        </div>
+
+
+          <div class="row"> 
+              <div class="col-md-6">
+                  <div class="field">
+                      <div class="form-group">
+                       
+ 
+                        <strong>Telefono de trabajo:</strong>
+                        <%= @employee.tel_work %>
+                      
+                      </div>
+                  </div>
+
+              </div>
+              <div class="col-md-6">
+                  <div class="field">
+                      <div class="form-group">
+                 
+ 
+                        <strong>Telefono interno:</strong>
+                        <%= @employee.interno_tel_work %>
+                       
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+
+
+          <div class="row"> 
+              <div class="col-md-6">
+                  <div class="field">
+                      <div class="form-group">
+                         
+ 
+                          <strong>Email trabajo:</strong>
+                          <%= @employee.email_work %>
+                     
+                      </div>
+                  </div>
+              </div>
+          </div>
+                    </div>
+              </div>
+               <!--  fin bloque laborales del contacto-->
+        <%end%> <!-- bloque pdf laboral -->
+
+               <!--   bloque medicos del contacto-->
+               <% if params[:medico] %>
+                <div class="panel panel-default">
+                      <div class="panel-heading">Datos clinicos</div>
+                        <div class="panel-body">
+                             <div class="row"> 
+            <div class="col-md-6">
+              <div class="field">
+                <div class="form-group">
+                
+                  <strong>Nombre contacto:</strong>
+                  <%= @employee.name_contact %>
+                
+                </div>
+              </div>
+
+         </div>
+          <div class="col-md-6">
+              <div class="field">
+                  <div class="form-group">
+                     
+                      <strong>Telefono de emergencia:</strong>
+                      <%= @employee.tel_emergency %>
+                    
+                  </div>
+              </div>
+
+          </div>
+          </div>
+        
+          <div class="row"> 
+              <div class="col-md-6">
+                <div class="field">
+                    <div class="form-group">
+                       
+                        <strong>Obra Social:</strong>
+                        <%= @employee.name_social_work %>
+                       
+
+                    </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="field">
+                      <div class="form-group">
+                   
+ 
+                            <strong>Numero afiliado:</strong>
+                            <%= @employee.number_partner %>
+                      
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="field">
+                      <div class="form-group">
+                         
+ 
+                          <strong>Tipo de sangre:</strong>
+                          <%= @employee.blood_type %>
+                        
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="form-group">
+                     
+                      <strong>Alergias:</strong>
+                      <%= @employee.allergies %>
+                    
+                      </div>
+              </div>
+          </div>
+
+
+          <div class="row"> 
+              <div class="col-md-12">   
+                <div class="form-group">
+                  
+                  <strong>Antecedentes:</strong>
+                  <%= @employee.background %>
+                  
+                </div>
+              </div>
+          </div>
+          <div class="row"> 
+              <div class="col-md-12">
+                   
+                    <strong>Analisis clinicos:</strong>
+                    <%= @employee.clinical_analyzes %>
+                  
+              </div>
+          </div>
+                        </div>
+                </div>
+
+               
+               <!--  fin bloque medicos del contacto-->
+                        <% end %> <!-- pdf medico-->
+                      </div>
+                  
+
+                    
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+

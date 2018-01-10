@@ -1,0 +1,2 @@
+json.extract! academic, :id, :academic_training, :status, :start_data, :finish_data, :establishment, :discipline, :description, :employees_id, :created_at, :updated_at
+json.url academic_url(academic, format: :json)

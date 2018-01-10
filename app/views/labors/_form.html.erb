@@ -1,0 +1,325 @@
+<%= form_for(@labor, :builder => Judge::FormBuilder, remote: request.xhr?, html: {:class => 'well form-horizontal', data: { modal: true } }) do |f| %>
+  <% if labor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(labor.errors.count, "error") %> prohibited this labor from being saved:</h2>
+
+      <ul>
+      <% labor.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+      <!-- formulario nuevo labor -->
+      <!-- Si este nuevo registro se debe a un pase a planta permanente boolean==true -->
+      <!-- Agregar Onload para el select_tag -->
+      <div class="form-group">
+        <div class="col-md-4 control-label">
+          <%= f.label :permanent_plant_pass, "Pase a Planta Permanente: "%>
+          <abbr title="Seleccione esta opción si el registro laboral que va a ingresar corresponde a un pase a 'Planta Permanente'.">
+            <strong>?</strong>
+          </abbr>          
+        </div>
+        <div class="col-md-4">
+          <div class="input-group">
+            <%= f.check_box :permanent_plant_pass, {'type' => 'checkbox', 'id' => 'permanent_plant', 'onchange' => 'toggle_permanent_plant();'} %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-4 control-label">
+          <%= f.label :adscribed, "Adscrito: "%>
+          <abbr title="Seleccione esta opción si el empleado ejerce una función como adscrito a otro Organismo.">
+            <strong>?</strong>
+          </abbr>          
+        </div>
+        <div class="col-md-2">
+          <div class="input-group">
+            <%= f.check_box :adscribed, {'type' => 'checkbox', 'id' => 'adscribed', 'onchange' => 'toggle_adscribed();'} %>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-group">
+            <%= f.text_field :adscribed_organization_name, class: 'form-control', :placeholder => "Organismo Adscrito", :disabled => "true" %>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMBOS ANIDADOS correspondientes a la función desempeñada-->
+      <div class="form-group">
+        <%= f.label :general_direction, "Organismo:", :class=>'col-md-4 control-label' %>
+        <div class="col-md-4 selectContainer">
+          <div class="input-group">
+            <%= f.collection_select :general_direction, GeneralDirection.order(:name), :id, :name, { include_blank: true }, { :class=> "form-control" } %>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <%= f.label :direction, "Dirección:", :class=>'col-md-4 control-label' %>
+        <div class="col-md-4 selectContainer">
+          <div class="input-group">
+            <%= f.grouped_collection_select :direction, GeneralDirection.order(:name), :directions, :name, :id, :name, { include_blank: true }, { :class=> "form-control input-sm" } %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :department, 'Departamento:', :class=>'col-md-4 control-label' %> 
+        <div class="col-md-4 selectContainer">
+          <div class="input-group">
+          <%= f.grouped_collection_select :department, Direction.order(:name), :departments, :name, :id, :name, { include_blank: true }, { :class=> "form-control input-sm" } %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :function_id, 'Función:', :class=>'col-md-4 control-label' %>
+        <div class="col-md-4 selectContainer">
+          <div class="input-group">
+          <%= f.grouped_collection_select :function_id, Department.order(:name), :functions, :name, :id, :name, { include_blank: true }, { :class=> "form-control input-sm" } %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :contracting_regime, 'Régimen de Contratación: ', class: 'col-sm-4 control-label' %>
+        <div class="col-sm-8">
+          <%= f.select :contracting_regime, Labor.contracting_regime.options, { include_blank: true }, { :class=> "form-control input-sm", 'onchange' => 'regime();' }%>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :status, 'Estado: ', class: 'col-md-4 control-label'%>
+        <div class="col-md-4 inputGroupContainer">  
+          <div class="input-group">
+            <%= f.select :status, Labor.status.options, { include_blank: true }, { :class=> "form-control input-sm" } %>
+          </div>    
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :entry_date, 'Fecha de alta: ', class: 'col-md-4 control-label' %>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <%= f.text_field :entry_date, :class => 'datepicker', value: (labor[:entry_date].present? ? labor[:entry_date].strftime("%d/%m/%Y") : ''), 'placeholder' => 'dd-mm-yyyy', 'readonly' => 'true' %>  
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-4 control-label">
+          <%= f.label :departure_date_indefinite, "Fecha de baja indefinida: "%>
+          <abbr title="Seleccione esta opción si, en el registro laboral no se especifica duración y/o tiempo de permanencia.">
+            <strong>?</strong>
+          </abbr>          
+        </div>
+        <div class="col-md-4">
+          <div class="input-group">
+            <%= f.check_box :departure_date_indefinite, {'type' => 'checkbox', 'id' => 'departure_date_indefinite', 'onchange' => 'toggle_departure_indefinite();'} %>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <%= f.label :departure_date, 'Fecha de baja: ', class: 'col-md-4 control-label' %>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <%= f.text_field :departure_date, :class => 'datepicker', value: (labor[:departure_date].present? ? labor[:departure_date].strftime("%d/%m/%Y") : ''), 'placeholder' => 'dd-mm-yyyy', 'readonly' => 'true' %>
+          </div>
+        </div>
+      </div>
+
+<!--  ###### Se comenta la siguiente estructura por requerimientos del personal ########
+      <div class="form-group">
+        <%= f.label :takeover, 'Toma de posesión: ', class: 'col-md-4 control-label' %>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <%= f.text_field :takeover, class: 'form-control' %>
+          </div>
+        </div>
+      </div> -->
+
+      <div class="form-group">
+        <%= f.label :takeover_date, 'Toma de posesión: ', class: 'col-md-4 control-label' %>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <%= f.text_field :takeover_date, :class => 'datepicker', value: (labor[:takeover_date].present? ? labor[:takeover_date].strftime("%d/%m/%Y") : ''), 'placeholder' => 'dd-mm-yyyy', 'readonly' => 'true' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :legal_instrument, 'Instrumento Legal: ', class: 'col-md-4 control-label' %>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <%= f.text_area :legal_instrument, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+          <%= f.fields_for :attachment_files do |attachment| %>
+            <%= render 'attachment_file_fields', f: attachment %>
+          <% end %>
+          <%= link_to_add_fields 'Agregar Documento Adjunto <i class="fa fa-plus fa-1x" aria-hidden="true"></i>'.html_safe, f, :attachment_files %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :category, 'Categoría: ', class: 'col-md-4 control-label' %>
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+            <%= f.number_field :category, class: 'form-control', in: 1..24, step: 1 %>
+          </div>
+        </div>
+      </div
+
+      
+      <div class="btn-action">
+        <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+          <i class="fa fa-floppy-o " aria-hidden="true"></i> Guardar
+        <% end %>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+
+
+      
+<% end %><!-- fin formulario nuevo laboral -->
+
+<script>  
+  $(function() {
+    $('.datepicker').datepicker({dateFormat: 'dd/mm/yyyy',
+        language: 'es',
+        startView: 2,
+        //endDate: "'-10y'",
+        startDate: "'01/01/1900'"   
+    });
+
+    $('.validation').on('input select', function() {
+      judge.validate($(this)[0], {
+
+          valid: function(element) {
+                  $('button:submit').attr("disabled", false)
+                  element.style.border = '1px solid green';
+                   $("p").html('');
+              
+          },
+          invalid: function(element, messages) {
+            $('button:submit').attr("disabled", true)
+             element.style.border = '1px solid red';
+             document.getElementById(element.id).innerHTML = (messages.join(','));
+              
+            }
+      });
+    });
+
+
+    var directions, departments, functions;
+    departments = $('#labor_department').html();
+    functions = $('#labor_function_id').html();
+    directions = $('#labor_direction').html();
+    // console.log(departments);
+
+    $('#labor_general_direction').change(function() {
+      var general_direction, options_directions;
+      general_direction = $('#labor_general_direction :selected').text();
+      options_directions = $(directions).filter("optgroup[label='" + general_direction + "']").html();
+      // console.log(options_directions);
+      if (options_directions){
+        return $('#labor_direction').html(options_directions);
+      } else {
+        return $('#labor_direction').empty();
+      }
+    });
+
+
+
+
+    $('#labor_direction').change(function() {
+      //var direction, options_departments;
+      var options_departments
+      direction = $('#labor_direction :selected').text();
+      options_departments = $(departments).filter("optgroup[label='" + direction + "']").html();
+      console.log(options_departments);
+      if (options_departments) {
+        return $('#labor_department').html(options_departments);
+      } else {
+        return $('#labor_department').empty();
+      }
+    });
+
+
+    $('#labor_department').change(function() {
+      console.log('ENTRO Funcion');
+      var department, options_function;    
+
+      department = $('#labor_department :selected').text();
+      options_function = $(functions).filter("optgroup[label='" + department + "']").html();
+              
+
+      console.log(options_function);
+      if (options_function) {
+        return $('#labor_function_id').html(options_function);
+      } else {
+        return $('#labor_function_id').empty();
+      }
+      
+    });
+  });
+
+  function toggle_permanent_plant(){
+    if(document.querySelector('#permanent_plant').checked){
+      document.getElementById('departure_date_indefinite').checked=true;
+      document.getElementById('departure_date_indefinite').disabled=true;
+      document.getElementById('labor_contracting_regime').value="Planta Permanente";
+      document.getElementById('labor_contracting_regime').disabled=true;
+      // document.getElementById('labor_departure_date_3i').disabled=true;
+      // document.getElementById('labor_departure_date_2i').disabled=true;
+      // document.getElementById('labor_departure_date_1i').disabled=true;
+      document.getElementById('labor_departure_date').disabled=true;
+    }else{
+      document.getElementById('departure_date_indefinite').checked=false;
+      document.getElementById('departure_date_indefinite').disabled=false;
+      document.getElementById('labor_contracting_regime').disabled=false;
+      // document.getElementById('labor_departure_date_3i').disabled=false;
+      // document.getElementById('labor_departure_date_2i').disabled=false;
+      // document.getElementById('labor_departure_date_1i').disabled=false;
+      document.getElementById('labor_departure_date').disabled=false;
+    }
+  }
+  function toggle_departure_indefinite(){
+    if(document.querySelector('#departure_date_indefinite').checked){
+      document.getElementById('labor_departure_date').disabled=true;
+    }else{
+      document.getElementById('labor_departure_date').disabled=false;
+    }
+  }
+
+  function toggle_adscribed(){
+    if(document.querySelector('#adscribed').checked){
+      document.getElementById('labor_adscribed_organization_name').disabled=false;
+      document.getElementById('labor_general_direction').disabled=true;
+      document.getElementById('labor_direction').disabled=true;
+      document.getElementById('labor_department').disabled=true;
+      document.getElementById('labor_function_id').disabled=true;      
+    }else{
+      document.getElementById('labor_adscribed_organization_name').disabled=true;
+      document.getElementById('labor_general_direction').disabled=false;
+      document.getElementById('labor_direction').disabled=false;
+      document.getElementById('labor_department').disabled=false;
+      document.getElementById('labor_function_id').disabled=false; 
+    }
+  }
+
+  function regime(){
+    var aux = document.getElementById("labor_contracting_regime").value;
+    if (aux == 'Contrato Sin Relación de Dependencia') {
+      document.getElementById('labor_category').disabled=true;
+    } else {
+      document.getElementById('labor_category').disabled=false;
+    }
+  }
+</script>

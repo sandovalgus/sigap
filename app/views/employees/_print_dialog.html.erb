@@ -1,0 +1,64 @@
+<div class="modal fade" id="miModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" aria-hidden="true" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title"><i class="fa fa-print" aria-hidden="true"></i>
+ Secciones a imprimir </h4>
+                        </div>
+   <%= form_tag pdf_employee_path( id: @employee.id, format: :pdf, :html => {:class => "form_print_dialog"}), :target => '_blank' do  %>
+                        <div class="modal-body">
+                   
+                
+                      
+                              
+                         <ul class="list-group">
+                            <li class="list-group-item">
+                              Datos Contacto
+                            <div class="material-switch pull-right">
+                            <%= check_box_tag :contacto %>
+                            <label for="contacto" class="label-success"></label>
+                            </div>
+                            </li>
+                             <li class="list-group-item">
+                            Domicilio
+                            <div class="material-switch pull-right">
+                            <%= check_box_tag :domicilio %>
+                            <label for="domicilio" class="label-success"></label>
+                            </div>
+                            </li>
+                            <li class="list-group-item">
+                            Datos Laboral (solo se imprimirán los activos)
+                            <div class="material-switch pull-right">
+                            <%= check_box_tag :laboral %>
+                            <label for="laboral" class="label-success"></label>
+                            </div>
+                            </li>
+                            <li class="list-group-item">
+                            Datos Medico
+                            <div class="material-switch pull-right">
+                            <%= check_box_tag :medico %>
+                            <label for="medico" class="label-success"></label>
+                            </div>
+                            </li>
+                             <li class="list-group-item">
+                            Datos Familiares
+                            <div class="material-switch pull-right">
+                            <%= check_box_tag :familia %>
+                            <label for="familia" class="label-success"></label>
+                            </div>
+                            </li>
+                         </ul>
+                        </div>
+
+                        <div class="modal-footer">
+                    <button class="btn btn-default"  type="submit" onclick="closePrint()">Imprimir</button>
+                   
+                            <button class="btn btn-default" data-dismiss="modal">Cancelar</button>                           
+                        </div>
+                          <%end%>
+
+
+                    </div>
+                </div>
+            </div> 

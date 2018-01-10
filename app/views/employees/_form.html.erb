@@ -1,0 +1,279 @@
+
+  <% if employee.errors.any? %>
+      <div class="alert alert-danger alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <strong>Atencion!</strong> Se ha detectado <%= pluralize(employee.errors.count, "errores") %>
+          <ul>
+            <% employee.errors.full_messages.each do |message| %>
+               <li><h5><%= message %></h5>  </li>
+            <% end %>
+          </ul>
+      </div>
+      <% end %>
+      <%= form_for(employee, :builder => Judge::FormBuilder,  html: { multipart: true }) do |f| %>
+      <!-- page content -->
+      <div class="right_col" role="main">
+      <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">           
+                  <%= link_to 'Cancelar <i class="fa fa-times " aria-hidden="true"></i>'.html_safe, "javascript:history.back(1)",class: 'btn btn-default pull-right'  %>
+                  <%= link_to 'Volver Listado <i class="fa fa-undo" aria-hidden="true"></i>'.html_safe, root_path(),class: 'btn btn-default pull-right'  %>  <span>
+                  <div class="x_content">
+                      <!-- lock -->
+                      <%= f.hidden_field :lock_version %>
+                      <fieldset class="scheduler-border">
+                          <legend class="scheduler-border"><h3>Datos de Contacto</h3></legend>
+                          <div class="row row-no-top"><!--row#1 #1 -->
+                              <div class="col-md-6">
+                                  <div class="field">
+                                      <div class="form-group">
+                                          <%= f.label :legajo, "Legajo (*)" %>  
+                                          <p class="errores" id="employee_legajo"><%= @employee.errors[:legajo].to_s[/\w([^"]*)/] %></p>
+                                          <%= f.text_field :legajo, :validate => true, autofocus: true, :required => true, :class=>"form-control input-sm validation" ,placeholder: "Legajo" %>  
+                                      </div>
+                                  </div>
+                              </div>
+                          </div><!--end row#1 #1 -->
+                          <div class="row"><!--row#1 #2 -->
+                              <div class="col-md-6">
+                                  <div class="field">
+                                      <div class="form-group">
+                                          <%= f.label :name, "Nombre (*)" %>
+                                          <p class="errores" id="employee_name"><%= @employee.errors[:name].to_s[/\w([^"]*)/] %></p>
+                                          <%= f.text_field :name,:validate => true, autofocus: true,:required => true,:class=>"form-control input-sm validation" ,placeholder: "Nombre" %>    
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="field">
+                                      <div class="form-group <%= @employee.errors[:last_name].any? ? " has-error has-feedback" : "" %>">
+                                      <%= f.label :last_name, "Apellido (*)" %>
+                                      <p class="errores" id="employee_last_name"><%= @employee.errors[:last_name].to_s[/\w([^"]*)/] %></p>
+                                      <%= f.text_field :last_name,:validate => true, autofocus: true,requiered: true, :class=>"form-control input-sm validation" ,placeholder: "Apellido" %>  
+                                      </div>
+                                  </div>
+                              </div>
+                          </div><!--end row#2 -->
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group <%= @employee.errors[:birthday].any? ? " has-error has-feedback" : "" %>">
+                                    <%= f.label :birthday, "Fecha de Nacimiento" %>
+                                    <% fecha = @employee.birthday !=nil ? (@employee.birthday.strftime "%d/%m/%Y") : '' %>
+                                    <%= f.text_field :birthday, :class => 'datepicker', value: fecha , 'placeholder'=> "dd-mm-yyyy", 'readonly' => 'true' %><br/>
+                                  </div>
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="field">
+                                      <div class="form-group">
+                                          <%= f.label :nationality, "Nacionalidad:" %>
+                                          <%= f.select :nationality, Employee.nationality.options ,{},class: "form-control input-sm" %>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="row"><!--row #3 -->
+                              <div class="col-md-6">
+                                  <div class="field">
+                                      <div class="form-group">
+                                          <%= f.label :document_type, "Tipo de Documento" %>
+                                          <%= f.select :document_type, Employee.document_type.options ,{},class: "form-control input-sm" %>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-6 ">
+                                  <div class="field">
+                                      <div class="form-group <%= @employee.errors[:document_number].any? ? " has-error has-feedback" : "" %>">
+                                          <%= f.label :document_number, "N° de Documento (*)" %>
+                                          <p class="errores" id="employee_document_number"><%= @employee.errors[:document_number].to_s[/\w([^"]*)/] %></p>
+                                          <%= f.text_field :document_number,:validate => true, autofocus: true,requiered: true,:class=>"form-control input-sm validation" ,placeholder:"Ingreso Número de Documento" %>  
+                                      </div>
+                                  </div>
+                              </div>  
+                          </div><!--end row#3 -->
+                          <div class="row"><!--row#4 -->
+                              <div class="col-md-6">
+                                  <div class="field">
+                                      <div class="form-group">
+                                          <%= f.label :cuil, "CUIL" %>
+                                          <%= f.text_field :cuil, autofocus: true,requiered: false, :class=>"form-control input-sm",laceholder: "Ingrese CUIL" %>  
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="field">
+                                      <div class="form-group">
+                                          <%= f.label :email, "Email (*)" %>
+                                          <p class="errores" id="employee_email"><%= @employee.errors[:email].to_s[/\w([^"]*)/] %></p>
+                                          <%= f.text_field :email, :validate => true, autofocus: true, :class=>"form-control input-sm validation", placeholder: "ejemplo@email.com", type:"email" %>  
+                                      </div>
+                                  </div>
+                              </div>
+                          </div><!--end row#4 -->
+                          <div class="row"><!--row #5 -->
+                              <div class="col-md-4">
+                                  <div class="field">
+                                      <div class="form-group">
+                                          <%= f.label :tel_cel, "Celular" %>
+                                          <%= f.text_field :tel_cel, autofocus: true,requiered: false, :class=>"form-control input-sm" ,placeholder: "Celular" %>  
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-4">
+                                  <div class="field">
+                                      <div class="form-group">
+                                          <%= f.label :tel_home, "Telefono Fijo" %>
+                                          <%= f.text_field :tel_home, autofocus: true,requiered: false, :class=>"form-control input-sm" ,placeholder: "Telefono" %>  
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-4">
+                                    <div class="field">
+                                        <div class="form-group">
+                                            <%= f.label :other_tel, "Otro Telefono" %>
+                                            <%= f.text_field :other_tel,autofocus: true,requiered: false, :class=>"form-control input-sm",placeholder:"Otro Telefono" %>  
+                                        </div>
+                                    </div>
+                              </div>
+                          </div><!--end row#5 -->
+                          <div class="row"><!--row #5-->
+                              <div class="col-md-6">
+                                  <div class="field">
+                                      <div class="form-group">
+                                          <%= f.label :marital_state, "Estado Civil" %>
+                                          <%= f.select :marital_state, Employee.marital_state.options ,{},class: "form-control input-sm" %>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-4">
+                                  <div class="field">
+                                      <div class="form-group">
+                                          <%= f.label :avatar, "Foto de Perfil" %>
+                                          <%= f.file_field :avatar, class: "btn btn-info btn-sm"%> 
+                                          <%= f.hidden_field :avatar_cache %>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-2 miniatura">
+                                  <%= image_tag(@employee.avatar_url) if @employee.avatar? %>
+                              </div>
+                          </div><!--end row#5-->
+                          <div class="row"> <!-- row #6 -->
+                            <div class="col-md-6">
+                              <field>
+                                <div class="form-group">
+                                  <%= f.label :date_of_admission, "Fecha de Ingreso al Organismo" %>
+                                  <%= f.text_field :date_of_admission, :class => 'datepicker', value: (@employee.date_of_admission.present? ? @employee.date_of_admission.strftime("%d/%m/%Y") : ''), 'placeholder' => 'dd-mm-yyyy', 'readonly' => 'true' %>
+                                </div>
+                              </field>
+                            </div>                            
+                          </div>
+                   
+                     
+                      </fieldset>
+                      <div class="form-group">
+                          <%= f.fields_for :addresses do |builder| %>
+                          <%= render "address_fields", f: builder %>
+                          <% end %>
+                          <%= link_to_add_fields 'Agregar Domicilio <i class="fa fa-plus fa-1x" aria-hidden="true"></i>'.html_safe, f, :addresses %>
+                      </div>
+                      <div class="field">
+                          <!-- <div class="form-group "> -->
+                          <%= f.fields_for :attachment_files do |attachment| %>
+                          <%= render 'attachment_file_fields', f: attachment %>
+                          <%end%>  
+                          <div class="btn-adjunto-doc">
+                          <%= link_to_add_fields 'Adjuntar Documento <i class="fa fa-paperclip fa-1x" aria-hidden="true"></i>'.html_safe, f, :attachment_files %> 
+                          </div>
+                          <!-- </div> -->
+                      </div>
+                      <div class="x_panel">
+                          <%= link_to 'Cancelar <i class="fa fa-times " aria-hidden="true"></i>'.html_safe, 'javascript: history.go(-1);',class: 'btn btn-default pull-right'  %>
+                          <%= button_tag(type: 'submit', class: "btn btn-primary  pull-right") do %>
+                          <i class="fa fa-floppy-o " aria-hidden="true"></i>
+                          Guardar
+                          <% end %>
+                      </div>             
+                  </div>
+              </div>
+          </div>
+      </div>
+
+
+
+      <script>
+
+      $( document ).ready(function() {  
+
+        $('.validation').on('input select', function() {
+          judge.validate($(this)[0], {
+
+            valid: function(element) {
+              element.style.border = '2px solid green';
+              $("p").fadeOut();
+              var name = $('input[id="employee_name"]').val();
+              var last_name = $('input[id="employee_last_name"]').val();
+              var legajo = $('input[id="employee_legajo"]').val();
+              var document_number = $('input[id="employee_document_number"]').val();
+              var email = $('input[id="employee_email"]').val();
+              if (name.length == 0 || last_name.length == 0 || legajo.length == 0 || document_number.length == 0){
+                console.log ("no pasa");
+                $('button:submit').attr("disabled", true);
+              }else{
+                $('button:submit').attr("disabled", false);
+                console.log("pasa");
+              }
+            },
+            invalid: function(element, messages) {
+              console.log(element.id);
+              $('button:submit').attr("disabled", true);
+              element.style.border = '2px solid red';
+              document.getElementById(element.id).innerHTML = (messages.join(','));
+              $('#'+element.id).fadeIn("slow");
+
+            }
+          });
+        });
+        $('.datepicker').datepicker({dateFormat: 'dd/mm/yyyy',
+        language: 'es',
+        startView: 2,
+        endDate: "'-10y'",
+        startDate: "'01/01/1900'"   
+
+        });
+
+        var states, cities;
+        states = $('#employee_State_id').html();
+        cities = $('#employee_city_id').html();
+        console.log(states);
+        $('#employee_country_id').change(function() {
+          var country, options_states;
+          country = $('#employee_country_id :selected').text();
+          options_states = $(states).filter("optgroup[label=" + country + "]").html();
+          console.log(options_states);
+          if (options_states) {
+            return $('#employee_State_id').html(options_states);
+
+          } else {
+            return $('#employee_State_id').empty();
+            return $('#employee_city_id').empty();
+          }
+
+        });
+
+        $('#employee_State_id').change(function() {
+          console.log('ENTRO CIUDAD');
+          var state, options_city;
+          state = $('#employee_State_id :selected').text();
+          options_city = $(cities).filter("optgroup[label='" + state + "']").html();
+          console.log(options_city);
+          if (options_city) {
+           return $('#employee_city_id').html(options_city);
+          } else {
+            return $('#employee_city_id').empty();
+          }
+
+        });
+
+      });
+      </script>
+  <%end%>

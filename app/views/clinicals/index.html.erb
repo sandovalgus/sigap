@@ -1,0 +1,142 @@
+<div class="x_panel">
+    <div class="x_title">
+        <h2>Datos Clinicos</h2>
+        <div class="btn-action">
+            <% if @clinical %>
+              <%= link_to 'Editar <i class="fa fa-pencil-square-o" aria-hidden="true"></i>'.html_safe, edit_clinical_path(@clinical), data: { modal: true, :toggle=>"tooltip" }, class: 'btn btn-default tag-tooltip', 'data-original-title' => "Editar" %> <span>
+
+            <%= link_to 'Eliminar <i class="fa fa-trash-o" aria-hidden="true"></i>'.html_safe,@clinical, method: :delete ,class: 'btn btn-default tag-tooltip', :data => {:toggle=>"tooltip", confirm: 'Esta seguro que desea eliminar los datos clinicos?'}, 'data-original-title' => "Eliminar"   %>  <span>
+            <%else%>
+
+              <%= link_to '<i class="fa fa-plus" aria-hidden="true"></i> <i class="fa fa-medkit" aria-hidden="true"></i>'.html_safe, new_clinical_path,data: { modal: true }, class: 'btn btn-default '  %> 
+
+            <%end%>
+              <%= link_to 'Volver <i class="fa fa-undo" aria-hidden="true"></i>'.html_safe,employee_path(@employee) ,class: 'btn btn-default tag-tooltip', :data => {:toggle=>"tooltip", }, 'data-original-title' => "Volver"  %>    <span>
+        </div>  
+        <div class="clearfix"></div>
+    </div> <!-- end x_title -->
+
+    <div class="panel-body">
+      <div class="card-block">
+        <!-- Datos del empleado -->
+        <%= render "partials/header_employee"%>
+        <!-- Fin datos del empleado -->
+      </div>
+    </div>
+
+    <% if @clinical %>
+       <div class="col-md-9 col-md-offset-1">
+        <div class="panel panel-default"><!-- datos basicos-->
+            <div class="panel-heading">Datos Basicos Clinicos</div>            
+                
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <strong>Nombre del Contacto</strong>
+                                <%=  @clinical.name_contact %>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <strong>Tel. de emergencia</strong>
+                                <%= @clinical.tel_emergency %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <strong>Obra Social</strong> 
+                                <%= @clinical.name_social_work %>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <strong>Numero de afiliado</strong>
+                                <%= @clinical.number_partner %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <strong>Tipo de Sangre</strong>
+                                <%= @clinical.blood_type  %>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <strong>Alergias</strong>
+                                <%= @clinical.allergies  %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <strong>Antecedentes</strong>
+                                <%=@clinical.background %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <strong>Conclusiones</strong>
+                            <p>Debe informar en forma concreta sobre la aptitud o ineptitud del examinado; en este ultimo caso especificar las causas:</p>
+                            <div class="form-group area-text">
+                                <%= @clinical.conclusion.present? ? @clinical.conclusion : '' %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <strong>Profesional Actuante</strong>
+                                <%= @clinical.profesional_actuante.present? ? @clinical.profesional_actuante : '' %>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Documentos Adjuntos -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Documentos Adjuntos</div>                        
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <field>
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <th></th>
+                                                <th>Nombre</th>
+                                                <th>Comentario</th>
+                                                <th>Subido</th>
+                                            </thead>
+                                            <tbody>
+                                                <% @clinical.attachment_files.each do |attachment| %>
+                                                    <tr>
+                                                        <td><%= link_to '<i class="fa fa-paperclip" aria-hidden="true"></i>'.html_safe, attachment.document_url,  :target => "_blank", class: "btn btn-default btn-xs"%></td>
+                                                        <td><%= attachment.name %></td>
+                                                        <td><%= attachment.commentary %></td>
+                                                        <td><%= attachment.created_at %></td>
+                                                    </tr>
+                                                <%end%>
+                                            </tbody>
+                                        </table>
+                                    </field>
+                            </div> <!-- end row documentos adjuntos -->
+                        </div>
+                    </div> <!-- end panel documentos adjuntos  -->
+                </div> <!-- end panel-body -->
+            </div><!-- fin datos basicos-->
+        <!-- Examen psico-fisico-->
+        <!-- render 'psicofisico' -->
+        <!-- fin Examen psico-fisico-->
+    <%else %>
+        <fieldset class="">
+            <br/>
+            <div class="alert alert-warning">
+                <h3 align="center"><strong>No se han agregados datos clínicos</strong> <span class="label label-warning"><i class="fa fa-exclamation " aria-hidden="true"></i></span>
+                </h3>
+            </div>
+        </fieldset>
+    <% end %>
+</div>

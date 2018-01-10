@@ -1,0 +1,700 @@
+<script>
+
+
+  function valueBarra(){
+    var completo = $(".pf-value").length;
+    var porcentaje = completo *100/54;
+    var porc = porcentaje.toFixed(2);
+    var valor = porcentaje.toFixed();
+    console.log("valor porcentaje "+porc);
+    $('#progreso').width( valor + '%' );
+    $('#progreso').attr( 'aria-valuenow', valor );
+    $('#progreso').text(valor + '% completado');
+    var badge = "<span class='badge badge-warning'>54</span>";
+    $(".tanto-de-total").html("<p>"+completo +" de "+badge+"</p>");
+  }
+
+</script>
+<div class="pf-total">
+
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+      <div class="porcentaje-total">
+        <div class="progress">
+        <div  id="progreso" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" >
+          
+        </div>
+      </div>
+      <div class="tanto-de-total"></div>
+      </div>
+
+  </div>
+</div>
+
+<!-- Examen psico-fisico -->
+<div class="panel panel-default">
+  <div class="panel-heading">EXAMEN PSICO-FISICO PARA INGRESO</div>
+  <div class="panel-body">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+     
+             <strong>Lugar:</strong>
+              <%if @clinical.lugar.present?%>
+                <p class="pf-value ">
+                 <%= @clinical.lugar %>
+                </p>
+              <%end%>
+          
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+            <strong>Fecha:</strong>
+              <%if @clinical.fecha.present?%>
+                <div class="pf-value">
+                 <%= @clinical.fecha %>
+                </div>
+              <%end%>
+            
+            </div>
+        </div>
+    </div>
+
+     <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+            <strong>Apellidos:</strong>
+               <div class="pf-value">
+                 <%=@employee.last_name%>
+                </div>
+             
+
+            </div> 
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+            <strong>Nombres:</strong>
+            <div class="pf-value">
+                 <%=@employee.name%>
+                </div>
+            
+
+            </div>
+        </div>
+         <div class="col-md-2">
+            <div class="form-group">
+            <strong>Clase</strong>
+            
+                <div class="pf-value">
+                 <%= @employee.birthday.year %>
+                </div>
+            
+          
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+            <strong>Edad:</strong>
+              
+                <div class="pf-value">
+                 <%= @edad %>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+        <strong>Documento de identidad:</strong>
+            <div class="pf-value">
+                <%=@employee.document_number%>
+                </div>
+
+
+        </div>
+
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+        <strong>Nacionalidad:</strong>
+       
+                <div class="pf-value">
+                 <%= @employee.nationality %>
+                </div>
+         
+        </div>
+
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+        <strong>Estado civil:</strong>
+          <div class="pf-value">
+                  <%= @employee.marital_state %>
+                </div>
+         
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8">
+          <div class="form-group">
+          <strong>Tarea para la que es designado:</strong>
+          <%if @clinical.tarea_designado.present?%>
+                <div class="pf-value">
+                 <%= @clinical.tarea_designado %>
+                </div>
+              <%end%>
+           
+          </div>
+      </div>
+      <div class="col-md-4">
+          <div class="form-group">
+            <strong>Categoria:</strong>
+                <div class="pf-value">
+                   <%= @employee.category %>
+                </div>
+             
+          </div>
+      </div>
+    </div>
+
+    <hr>
+    <h3 class="title-sub"><u>Historia Clinica</u></h3>
+    <div class="seccion-psicofisico">
+    <div class="row">
+        <div class="col-md-2">
+          <div class="form-group">
+          <strong>Peso:</strong>
+          <%if @clinical.peso.present?%>
+                <div class="pf-value">
+                 <%= @clinical.peso %>
+                </div>
+              <%end%>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+          <strong>Estatura:</strong>
+          <%if @clinical.estatura.present?%>
+                <div class="pf-value">
+                 <%= @clinical.estatura %>
+                </div>
+              <%end%>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+          <strong>Pulso:</strong>
+          <%if @clinical.pulso.present?%>
+                <div class="pf-value">
+                 <%= @clinical.pulso %>
+                </div>
+              <%end%>
+          </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+            <strong>Temperatura:</strong>
+            <%if @clinical.temperatura.present?%>
+                <div class="pf-value">
+                 <%= @clinical.temperatura %>
+                </div>
+              <%end%>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-2">
+        <strong>Presion Arterial:</strong>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+        <strong>Maxima:</strong>
+        <%if @clinical.presion_arterial_min.present?%>
+                <div class="pf-value">
+                 <%= @clinical.presion_arterial_min %>
+                </div>
+              <%end%>
+        </div>
+      </div>
+      <div class="col-md-2">
+          <div class="form-group">
+          <strong>Minima:</strong>
+          <%if @clinical.presion_arterial_min.present?%>
+                <div class="pf-value">
+                 <%= @clinical.presion_arterial_min %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+        <strong>Antecedentes Hereditarios y Personales:</strong>
+        <%if @clinical.antec_heriditarios_personales.present?%>
+                <div class="pf-value">
+                 <%= @clinical.antec_heriditarios_personales %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+        <strong>Estado General, Morfologico y Nutricion:</strong>
+        <%if @clinical.estado_gral_morfologia_nutricion.present?%>
+                <div class="pf-value">
+                 <%= @clinical.estado_gral_morfologia_nutricion %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+    </div>
+    </div>
+    <div class="seccion-psicofisico">
+       <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+        <strong>Sistema Oseo, Articular y Muscular:</strong>
+        <%if @clinical.sistema_oseo_art_muscular.present?%>
+                <div class="pf-value">
+                 <%= @clinical.sistema_oseo_art_muscular %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+          <div class="form-group">
+          <strong>Aparato Respiratorio:</strong>
+          <%if @clinical.aparato_respiratorio.present?%>
+                <div class="pf-value">
+                 <%= @clinical.aparato_respiratorio %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+      <div class="col-md-3">
+          <div class="form-group">
+          <strong>Tos:</strong>
+          <%if @clinical.tos.present?%>
+                <div class="pf-value">
+                 <%= @clinical.tos %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+      <div class="col-md-3">
+           <div class="form-group">
+           <strong>Expectoracion:</strong>
+           <%if @clinical.expectoracion.present?%>
+                <div class="pf-value">
+                 <%= @clinical.expectoracion %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+      <div class="col-md-3">
+          <div class="form-group">
+          <strong>Disnea:</strong>
+          <%if @clinical.disnea.present?%>
+                <div class="pf-value">
+                 <%= @clinical.disnea %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+          <div class="form-group">
+          <strong>Fuma:</strong>
+          <%if @clinical.fuma.present?%>
+                <div class="pf-value">
+                 <%= @clinical.fuma %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+      <div class="col-md-2">
+           <div class="form-group">
+           <strong>Cuantos por dia:</strong>
+           <%if @clinical.cuanto_fuma.present?%>
+                <div class="pf-value">
+                 <%= @clinical.cuanto_fuma %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+      <div class="col-md-2">
+          <div class="form-group">
+          <strong>Roncus:</strong>
+          <%if @clinical.roncus.present?%>
+                <div class="pf-value">
+                 <%= @clinical.roncus %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+      <div class="col-md-3">
+          <div class="form-group">
+          <strong>Sibilancia:</strong>
+          <%if @clinical.sibilancia.present?%>
+                <div class="pf-value">
+                 <%= @clinical.sibilancia %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+      <div class="col-md-3">
+          <div class="form-group">
+          <%if @clinical.estertores.present?%>
+                <div class="pf-value">
+                 <%= @clinical.estertores %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+          <div class="form-group">
+          <strong>Aparato Digestivo y Anexos:</strong>
+          <%if @clinical.aparato_digestivo_anexos.present?%>
+                <div class="pf-value">
+                 <%= @clinical.aparato_digestivo_anexos %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+    </div>
+    </div>
+    <div class="seccion-psicofisico">
+       <hr>
+    <div class="row">
+      <div class="col-md-12">
+           <div class="form-group">
+           <strong>Intervenciones Quirurgicas Realizadas:</strong>
+           <%if @clinical.intervenciones_quirurgias.present?%>
+                <div class="pf-value">
+                 <%= @clinical.intervenciones_quirurgias %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+          <div class="form-group">
+          <strong>Aparato Urinario y Genital:</strong>
+          <%if @clinical.aparato_urinario_genital.present?%>
+                <div class="pf-value">
+                 <%= @clinical.aparato_urinario_genital %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+      <div class="col-md-6">
+          <div class="form-group">
+          <strong>Ciclo Menstruales:</strong>
+          <%if @clinical.ciclo_menstruales.present?%>
+                <div class="pf-value">
+                 <%= @clinical.ciclo_menstruales %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+          <strong>Aparato Circulatorio</strong>
+      </div>
+      <div class="col-md-4">
+           <div class="form-group">
+           <strong>Frec. Cardiaca:</strong>
+           <%if @clinical.aparato_circulatorio_frec_cardiaca.present?%>
+                <div class="pf-value">
+                 <%= @clinical.aparato_circulatorio_frec_cardiaca %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+      <div class="col-md-4">
+           <div class="form-group">
+           <strong>Varices:</strong>
+           <%if @clinical.aparato_circulatorio_varices.present?%>
+                <div class="pf-value">
+                 <%= @clinical.aparato_circulatorio_varices %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+    </div>
+   </div>
+   <div class="seccion-psicofisico">
+      <hr>
+    <div class="row">
+      <div class="col-md-12">
+           <div class="form-group">
+           <strong>Sistema Nervioso:</strong>
+           <%if @clinical.sistema_nervioso.present?%>
+                <div class="pf-value">
+                 <%= @clinical.sistema_nervioso %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+          <div class="form-group">
+          <strong>Examen Oftamologico:</strong>
+          <%if @clinical.examen_oftalmologico.present?%>
+                <div class="pf-value">
+                 <%= @clinical.examen_oftalmologico %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+    </div>
+    </div>
+  <div class="seccion-psicofisico">
+     <hr>
+    <div class="row">
+      <div class="col-md-12">
+          <div class="form-group">
+            <strong>Examen Otorrinolaringologico:</strong>
+            <%if @clinical.examen_otorrinolaringologico.present?%>
+                <div class="pf-value">
+                 <%= @clinical.examen_otorrinolaringologico %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+    </div>
+    </div>
+  <div class="seccion-psicofisico">
+     <hr>
+    <div class="row">
+      <div class="col-md-12">
+          <div class="form-group">
+            <strong>Examen de Piel:</strong>
+            <%if @clinical.examen_pel.present?%>
+                <div class="pf-value">
+                 <%= @clinical.examen_pel %>
+                </div>
+              <%end%>
+            <%= @clinical.examen_pel %>
+          </div>      
+      </div>
+    </div>
+    </div>
+  <div class="seccion-psicofisico">
+     <hr>
+    <div class="row">
+      <div class="col-md-12">
+          <div class="form-group">
+          <strong>Radiografia de Torax o Abreugrafia:</strong>
+          <%if @clinical.radiografia_torax_abreugrafia.present?%>
+                <div class="pf-value">
+                 <%= @clinical.radiografia_torax_abreugrafia %>
+                </div>
+              <%end%>
+          </div>  
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+          <div class="form-group">
+            <strong>Analisis de Orina:</strong>
+            <%if @clinical.analisis_orina.present?%>
+                <div class="pf-value">
+                 <%= @clinical.analisis_orina %>
+                </div>
+              <%end%>
+          </div>  
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+          <div class="form-group">
+          <strong>V.D.R.L:</strong>
+          <%if @clinical.vdrl.present?%>
+                <div class="pf-value">
+                 <%= @clinical.vdrl %>
+                </div>
+              <%end%>
+          </div>  
+      </div>
+      <div class="col-md-3">
+          <div class="form-group">
+          <strong>Chagas:</strong>
+          <%if @clinical.chagas.present?%>
+                <div class="pf-value">
+                 <%= @clinical.chagas %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+      <div class="col-md-3">
+          <div class="form-group">
+          <strong>Toxo:</strong>
+          <%if @clinical.toxo.present?%>
+                <div class="pf-value">
+                 <%= @clinical.toxo %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+      <div class="col-md-3">
+          <div class="form-group">
+          <strong>Parasitologia:</strong>
+          <%if @clinical.parasitologia.present?%>
+                <div class="pf-value">
+                 <%= @clinical.parasitologia %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+          <div class="form-group">
+          <strong>Glucemia:</strong>
+          <%if @clinical.glucemia.present?%>
+                <div class="pf-value">
+                 <%= @clinical.glucemia %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+      <div class="col-md-3">
+          <div class="form-group">
+          <strong>Uremia:</strong>
+          <%if @clinical.uremia.present?%>
+                <div class="pf-value">
+                 <%= @clinical.uremia %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+      <div class="col-md-3">
+          <div class="form-group">
+          <strong>Uricemia:</strong>
+          <%if @clinical.uricemia.present?%>
+                <div class="pf-value">
+                 <%= @clinical.uricemia %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+      <div class="col-md-3">
+          <div class="form-group">
+          <strong>Hemograma:</strong>
+          <%if @clinical.hamograma.present?%>
+                <div class="pf-value">
+                 <%= @clinical.hamograma %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+          <div class="form-group">
+          <strong>Eritrosodimentacion</strong>
+          <%if @clinical.eritrosodimentacion.present?%>
+                <div class="pf-value">
+                 <%= @clinical.eritrosodimentacion %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+      <div class="col-md-4">
+          <div class="form-group">
+          <strong>Colesteromia</strong>
+          <%if @clinical.colesteromia.present?%>
+                <div class="pf-value">
+                 <%= @clinical.colesteromia %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+      <div class="col-md-4">
+          <div class="form-group">
+          <strong>Otros:</strong>
+          <%if @clinical.otros.present?%>
+                <div class="pf-value">
+                 <%= @clinical.otros %>
+                </div>
+              <%end%>
+          </div>
+      </div>
+    </div>
+    </div>
+   <hr>
+    <div class="row">
+      <div class="col-md-12">
+            <strong>Otros Examenes complementarios que el profesional actuante considere necesarios o convenientes:</strong>
+          <div class="form-group area-text" >
+    
+          <%if @clinical.otros_examenes.present?%>
+                <div class="pf-value">
+                 <%= @clinical.otros_examenes %>
+                </div>
+              <%end%>
+
+          </div>
+      </div>
+    </div>
+       <hr>
+     <h3>Conclusiones</h3>  
+     <p>Debe informar en forma concreta sobre la aptitud o ineptitud del examinado; en este ultimo caso especificar las causas:
+     </p>
+      <div class="form-group area-text">
+        <%if @clinical.conclusion.present?%>
+          <div class="pf-value">
+            <%= @clinical.conclusion %>
+          </div>
+        <%end%>     
+      </div>
+
+      <div class="form-group">
+        <div class="pf-value">
+          <strong>Profesional Actuante: </strong>
+          <%= @clinical.profesional_actuante.present? ? @clinical.profesional_actuante : '' %>
+        </div>
+      </div>
+
+
+
+        
+
+
+
+  </div>
+  <!-- fin panel body-->
+</div>
+<!-- fin Examen psico-fisico -->
+<script>
+  valueBarra();
+
+</script>

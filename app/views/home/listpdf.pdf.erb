@@ -1,0 +1,79 @@
+
+ <div class="pdfList">
+ <p class="titulo">Listado de empleados</p>
+ 	
+ <table class="table table-bordered table-striped ">
+    <thead>
+      <tr>
+      <% if params[:name_and_lastname]%>
+        <th>Apellido y Nombre</th>
+      <% end %>
+      <% if params[:legajo]%>
+        <th>Legajo</th>
+      <%end%>
+      <% if params[:categoria]%>
+        <th>Cat.</th>
+      <%end%>
+      <% if params[:regimen]%>
+        <th>Regimen</th>
+      <%end%>
+      <% if params[:dni]%>
+        <th>D.N.I</th>
+      <%end%>
+      <% if params[:cuil]%>
+        <th>C.U.I.L</th>
+      <%end%>
+      <% if params[:email]%>
+        <th>Email</th>
+        <%end%>
+      </tr>
+    </thead>
+    <tbody>
+
+<% @employee.each do |employee| %>
+      <tr>
+        <% if params[:name_and_lastname]%>
+          <td>
+            <%= employee.last_name %>, <%= employee.name %>
+          </td>
+        <%end%>
+        <% if params[:legajo]%>
+          <td>        
+            <%= employee.legajo %>
+          </td>
+        <%end%>
+         <% if params[:categoria]%>
+          <td >
+             <%= employee.category %>
+          </td>
+          <%end%>
+
+   <% if params[:regimen]%>
+          <td>
+              <%= employee.regimen%>
+          </td>
+    <%end%>
+ <% if params[:dni]%>
+          <td>
+            <%= employee.document_number %>
+          </td>
+          <%end%>
+           <% if params[:cuil]%>
+          <td>
+          	<%= employee.cuil %>
+          </td>
+           
+           <%end%>
+            <% if params[:email]%>
+            <td>
+          	<%= employee.email%>
+          </td>
+          <%end%>
+
+
+      </tr>
+    <%end%>
+
+    </tbody>
+  </table>
+ </div>

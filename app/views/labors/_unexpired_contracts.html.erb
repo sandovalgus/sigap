@@ -1,0 +1,29 @@
+<table class="table table-condensed max-height-200 overflow">
+  <% @labors.each do |labor| %>
+  	<% if labor.departure_date.present? && labor.departure_date.future? %>
+  	<% inicio =  labor.departure_date %>
+  	<% fin = Time.now.to_s %>
+  	<% expired = (inicio.to_date - fin.to_date).to_i %>
+  	<% end %>
+    <tbody class="">
+      <% if expired.present? and expired <= 31  %>
+      <tr class="warning">
+        <td>
+          <%= link_to labors_path(:id => labor.employee.id) do %>
+            <small><strong>Legajo N°: <%= labor.employee.legajo %></strong></small><br>
+            <small class="text-muted"><%= labor.employee.last_name %> <%= labor.employee.name %></small>
+          <% end %>
+        </td>
+        <td><small><i class="fa fa-clock-o" aria-hidden="true"></i>
+             <%= expired.inspect %> días</small>
+        </td>
+        <td>
+        	<small>
+          <%= labor.departure_date !=nil ? (labor.departure_date.strftime "%d/%b") : '' %>
+          </small>
+        </td>
+      </tr> 
+      <% end %>     
+    </tbody>
+    <%end%>
+</table>

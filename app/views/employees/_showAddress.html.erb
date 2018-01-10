@@ -1,0 +1,126 @@
+
+   <%@employee.addresses.each do |domicilio|%>
+  <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+        <i class="fa fa-map-marker" aria-hidden="true"></i> 
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%=domicilio.id%>">Domicilio creado <%= domicilio.created_at.strftime "%d/%m/%Y"%></a>
+        <%= domicilio.actual.present? ? 'ACTUAL' : '' %>
+        </h4>
+      </div>
+      <div id="collapse<%=domicilio.id%>" class="panel-collapse collapse <%= domicilio.actual.present? ? 'in' : '' %>">
+        <div class="panel-body">
+
+          <div class="row">
+          <div class="col-md-6 ">
+              <div class="field">
+                  <div class="form-group">
+            <strong>Avenida - Calle:</strong>
+            <%= domicilio.address_street %>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6">
+              <div class="field">
+                  <div class="form-group">
+                
+       
+            <strong>Numero:</strong>
+            <%= domicilio.address_number %>
+
+                  </div>
+              </div>
+          </div>
+
+      </div><!--end row#5
+        -->
+      <div class="row"><!--row #8-->
+          <div class="col-md-4">
+              <div class="field">
+                  <div class="form-group">
+                 
+       
+            <strong>Piso:</strong>
+            <%= domicilio.address_floor %>
+
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="field">
+                  <div class="form-group">
+                
+       
+            <strong>Numero de departamento:</strong>
+            <%= domicilio.address_floor_apartment_number %>
+
+                  </div>
+              </div>
+          </div>
+            <div class="col-md-4">
+              <div class="field">
+                  <div class="form-group">
+             
+              <strong>Numero monoblock:</strong>
+              <%= domicilio.address_monoblock %>
+
+                  </div>
+              </div>
+          </div>
+
+      </div><!--end row#8 -->
+      <div class="row"><!--row #9 -->
+          <div class="col-md-12">
+              <div class="field">
+                  <div class="form-group">
+
+                <strong>Barrio:</strong>
+                <%= domicilio.neighborhood %>
+                  </div>
+              </div>
+          </div>
+
+      </div><!--end row#9 -->
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            
+            <strong>
+              Pais:
+            </strong> 
+            <%= domicilio.country.present? ? domicilio.country.name : "-"%>
+          
+             
+          </div>
+
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            
+            <strong>
+              Provincia:
+            </strong>
+             <%= domicilio.state.present? ? domicilio.state.name : "-"%>
+          </div>
+
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            
+            <strong>
+              Ciudad:
+            </strong>
+            <%= domicilio.city.present? ? domicilio.city.name : "-"%>
+          </div>
+
+        </div>
+      </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+<%end%>  <!-- for each domicilio -->

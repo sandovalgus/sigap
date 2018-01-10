@@ -1,0 +1,204 @@
+<!-- modal para imprimir -->
+<%= render 'print_dialog' %> 
+<div class="main_container">
+  <div  role="main">       
+    <div class="page-title">         
+      <div class="title_right"></div>
+      <div class="clearfix"></div>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Empleado del SiPTeD</h2>
+              <div class="btn-action">
+                <%= link_to '<i class="fa fa-undo" aria-hidden="true"></i>'.html_safe, root_path(),  class: 'btn btn-default tag-tooltip', :data => {:toggle=>"tooltip"}, 'data-original-title' => "Volver al Listado"%><span>
+
+                <%= link_to '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>'.html_safe, edit_employee_path(@employee),class: 'btn btn-default tag-tooltip', :data => {:toggle=>"tooltip"}, 'data-original-title' => "Editar"%><span>
+
+                <button class="btn btn-default" title="Imprimir" data-toggle="modal"  data-target="#miModal">
+                  <i class="fa fa-print" aria-hidden="true"></i>
+                </button>    
+                    
+                <%= link_to 'Formación Académica <i class="fa fa-graduation-cap" aria-hidden="true"></i>'.html_safe, academics_path(:id => @employee.id),class: 'btn btn-default tag-tooltip', :data => {:toggle=>"tooltip"}, 'data-original-title' => "Formación Académica"%><span>
+
+                <%= link_to 'Laboral <i class="fa fa-handshake-o" aria-hidden="true"></i>'.html_safe, labors_path(:id => @employee.id),class: 'btn btn-default tag-tooltip' , :data => {:toggle=>"tooltip"}, 'data-original-title' => "Laboral"%><span>
+
+                <%= link_to 'Datos Medicos <i class="fa fa-medkit" aria-hidden="true"></i>'.html_safe, clinicals_path(:ids => @employee.id),class: 'btn btn-default tag-tooltip' , :data => {:toggle=>"tooltip"}, 'data-original-title' => "Datos Medicos"%><span>
+
+                <%= link_to 'Grupo Familiar <i class="fa fa-users" aria-hidden="true"></i>'.html_safe, family_groups_path,class: 'btn btn-default tag-tooltip' , :data => {:toggle=>"tooltip"}, 'data-original-title' => "Grupo Familiar"%><span>
+
+                <%= link_to 'LAO <i class="fa fa-calendar-o" aria-hidden="true"></i>'.html_safe, '#', class: 'btn btn-default tag-tooltip' , :data => {:toggle=>"tooltip"}, :disabled => true, 'data-original-title' => "Licencia Anual Ordinaria"%><span>
+              </div>
+
+              <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+              <div class="col-md-2 col-sm-2 col-xs-12 profile_left">
+                <div class="profile_img">
+                  <div id="crop-avatar">
+                    <!-- Current avatar -->
+                    <% unless @employee.avatar.blank? %>   
+                      <%=image_tag(@employee.avatar.url, class:"img-responsive avatar-view")%>     
+                    <%else%>
+                      <%=image_tag("users/default_avatar.png", class:"img-responsive avatar-view")%>
+                    <%end%>
+                  </div>
+                </div>
+                <h3>  Legajo <strong><%= @employee.legajo %> </strong> </h3>
+              </div>
+              <div class="col-md-10 col-sm-10 col-xs-12">
+                <div class="profile_title">
+                  <div class="col-md-12">                  
+                    <h2><%= @employee.last_name %> <%= @employee.name %></h2>         
+                  </div>    
+                </div>                                       
+                <!-- datos del contacto-->
+                <div class="panel panel-default">
+                  <div class="panel-heading">Datos del Contacto</div>
+                    <div class="panel-body">                       
+                      <div class="row"><!--row#1 #2 -->
+                        <div class="col-md-6">
+                          <div class="field">
+                            <div class="form-group">
+                              <strong>Apellido y Nombre:</strong>
+                              <%= @employee.last_name %>,  <%= @employee.name %>                 
+                            </div>
+                          </div>
+                        </div>
+                      </div><!--end row#2 -->
+                      <div class="row"><!--row #3 -->
+                        <div class="col-md-4">
+                          <div class="field">
+                            <div class="form-group">          
+                              <strong>Tipo y Num. documento:</strong>
+                              <%= @employee.document_type %> - <%= @employee.document_number %>    
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <strong>Fecha de Nacimiento:</strong>
+                            <%= @employee.birthday !=nil ? (@employee.birthday.strftime "%d/%m/%Y") : '' %>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="field">
+                            <div class="form-group">       
+                              <strong>Nacionalidad:</strong>
+                              <%= @employee.nationality %>    
+                            </div>
+                          </div>
+                        </div>
+                      </div><!--end row#3 -->        
+                      <div class="row"><!--row#4 -->
+                        <div class="col-md-6">
+                          <div class="field">
+                            <div class="form-group">
+                              <strong>Email:</strong>
+                              <%= @employee.email %>         
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="field">
+                            <div class="form-group">     
+                              <strong>CUIL:</strong>
+                              <%= @employee.cuil %>     
+                            </div>
+                          </div>
+                        </div>
+                      </div><!--end row#4 -->
+                      <div class="row"><!--row #5 -->
+                        <div class="col-md-4">
+                          <div class="field">
+                            <div class="form-group">    
+                              <strong>Celular:</strong>
+                              <%= @employee.tel_cel %>      
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="field">
+                            <div class="form-group">        
+                              <strong>Teléfono casa:</strong>
+                              <%= @employee.tel_home %>     
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="field">
+                            <div class="form-group">        
+                              <strong>Otro telefono:</strong>
+                              <%= @employee.other_tel %>    
+                            </div>
+                          </div>
+                        </div>
+                      </div><!--end row#5 -->
+                      <div class="row"><!--row #6-->
+                        <div class="col-md-6">
+                          <div class="field">
+                            <div class="form-group">                                   
+                              <strong>Estado civil:</strong>
+                              <%= @employee.marital_state %>
+                              <% if @civil_state_relationship.present? %>
+                                - 
+                                <%= link_to(@civil_state_relationship, class: "civil_state", data: {modal: true}) do %>
+                                  <i class="fa fa-user" aria-hidden="true"></i>
+                                  <%= [@civil_state_relationship.last_name, @civil_state_relationship.name].join(', ') %>           
+                                <%end%>
+                              <%end%>                             
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <strong>Edad:</strong>
+                            <%= @edad%>
+                          </div>
+                        </div>                   
+                      </div><!--end row#5  -->
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="field">
+                            <div class="form-group">
+                              <strong>Fecha de Ingreso al Organismo:</strong>
+                              <%= @employee.date_of_admission.present? ? @employee.date_of_admission.strftime("%d/%m/%Y") : '-' %>
+                            </div>
+                          </div>
+                        </div>
+                      </div>          
+                    </div>
+                  </div>
+                  <!-- fin bloque datos del contacto-->
+                  <!--  bloque domicilio del contacto-->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">Domicilio</div>
+                    <div class="panel-body">
+                      <%= render "showAddress"%>
+                    </div>
+                  </div>
+                  <!--  fin bloque domicilio del contacto-->
+                  <div class="panel panel-default">
+                    <div class="panel-heading">Documentos Adjuntos</div>                        
+                      <div class="row">
+                        <div class="col-md-12">
+                         
+
+                          <div id="atachement_employe">
+                                <%= render "table_attachament_employe"%>
+                          </div>
+                        </div> <!-- end row documentos adjuntos -->
+                      </div>
+                    </div> <!-- end panel documentos adjuntos  -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      thecheck();
+    </script>

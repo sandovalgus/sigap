@@ -1,0 +1,45 @@
+<%= form_for(@labor,:builder => Judge::FormBuilder,  remote: request.xhr?, html: {:class => 'well form-horizontal', data: { modal: true } }) do |f| %>
+  <% if labor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(labor.errors.count, "error") %> prohibited this labor from being saved:</h2>
+
+      <ul>
+      <% labor.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+      <!-- formulario baja laboral -->
+      
+      <div class="form-group">
+        <div class="col-md-12">
+            <h3 class="text-danger">¡Atención! Esta a punto de dar de alta nuevamente este puesto laboral.</h3>
+        </div>
+        <div class="col-md-4 inputGroupContainer">  
+          <div class="input-group hidden">            
+            <%= f.select :status, options_for_select(['Activo'])%>
+          </div>    
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-4 inputGroupContainer">
+          <div class="input-group hidden">
+            <%= f.text_field :departure_date, :value => '', class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-action">
+        <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+          <i class="fa fa-floppy-o " aria-hidden="true"></i>
+          Guardar
+        <% end %>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+
+
+      <!-- fin formulario nuevo laboral -->
+
+<% end %>

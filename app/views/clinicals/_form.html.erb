@@ -1,0 +1,111 @@
+<%= form_for(@clinical, :builder => Judge::FormBuilder,remote: request.xhr?, html: { id: 'formClinical',  data: { modal: true  } }) do |f| %>
+
+<% if clinical.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(clinical.errors.count, "error") %> prohibited this clinical from being saved:</h2>
+    <ul>
+    <% clinical.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div> 
+<% end %>
+
+
+<!-- inicio primera seccion--> 
+<div class="panel panel-default">
+  <div class="panel-heading">Datos Basicos Clínicos</div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <%= f.label :name_contact, "Nombre del Contacto" %>
+            <p class="errores" id="clinical_name_contact"><%= @clinical.errors[:name_contact].to_s[/\w([^"]*)/] %></p>
+            <%= f.text_field :name_contact, :validate => true,:class=>"form-control input-sm validation" ,placeholder: "Contacto" , :required => true %>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <%= f.label :tel_emergency, "Teléfono de Emergencia" %>
+            <p class="errores" id="clinical_tel_emergency"><%= @clinical.errors[:tel_emergency].to_s[/\w([^"]*)/] %></p>
+            <%= f.text_field :tel_emergency,:class=>"form-control input-sm validation" ,placeholder: "Tel. Emergencia", :required => true  %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <%= f.label :name_social_work , "Obra Social" %>
+            <%= f.text_field :name_social_work ,:class=>"form-control input-sm validation" ,placeholder: "Obra Social"  %>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <%= f.label :number_partner, "Número de Afiliado" %>
+            <%= f.text_field :number_partner,:class=>"form-control input-sm validation" ,placeholder: "Número de Afiliado"  %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <%= f.label :blood_type , "Tipo de Sangre" %>
+            <%= f.select :blood_type, (Clinical.blood_type.options), {}, {:class => "form-control"} %> 
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <%= f.label :allergies, "Alergias" %>
+            <%= f.text_field :allergies,:class=>"form-control input-sm validation" ,placeholder: "Alergias"  %>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-12">        
+          <div class="form-group">
+            <h4>Conclusiones</h4>  
+            <p>Debe informar en forma concreta sobre la aptitud o ineptitud del examinado; en este ultimo caso especificar las causas:
+            </p>
+            <%= f.text_area :conclusion, class: "form-control input-sm" ,rows: 5%>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <%= f.label :profesional_actuante, "Profesional Actuante:" %>
+            <%= f.text_field :profesional_actuante, class: "form-control input-sm" %>
+          </div>
+        </div>  
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">Documentos Adjuntos</div>
+        <div class="panel-body">    
+          <div class="field">
+            <div class="form-group">
+              <%= f.fields_for :attachment_files do |attachment| %>
+                <%= render 'attachment_file_fields', f: attachment %>
+              <%end%>  
+              <%= link_to_add_fields 'Agregar Documento Adjunto <i class="fa fa-plus fa-1x" aria-hidden="true"></i>'.html_safe, f, :attachment_files %> 
+            </div>
+          </div>    
+        </div>
+      </div> <!-- end panel-default documentos adjuntos -->
+    </div> <!-- end panel-body -->
+  </div><!-- end panel-principal -->
+
+
+  <!-- btn save and cancel-->
+ <div class="btn-action">
+      <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+        <i class="fa fa-floppy-o " aria-hidden="true"></i>
+        Guardar
+      <% end %>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+ </div>
+<% end %>

@@ -1,0 +1,138 @@
+ <script>
+  $(document).ready(function() {
+    var dataTable = $('#users').dataTable();
+    $("#searchbox").keyup(function() {
+        dataTable.fnFilter(this.value);
+     
+    }); 
+
+
+  
+        $("#q_reset").click(function(){
+        $("#q_legajo_cont").val('');
+        $("#q_last_name_or_name_or_legajo_or_email_cont_any").val('');
+        $("#select option:selected").val('');
+        $("#q_labors_category_matches").val('');
+        $("#q_labors_contracting_regime_matches").val('');
+
+        $("#formsearch").submit();
+    });
+  });
+</script>
+
+  
+ 
+<!-- Listad o de Empleados - Vista principal -->
+ <%= render 'print_dialog_list' %> 
+<div class="col-md-9"><!-- col empleados list -->
+<div class="panel panel-default" >
+  <div class="panel-heading">Empleados
+      <div class="pull-right">
+        <button class="btn btn-default print_list" data-toggle="modal" data-target="#miModal"> <i class="fa fa-print" aria-hidden="true"></i> </button>
+      </div>
+  </div>
+ 
+      <div class="searchContenedor">
+
+          <%= search_form_for @search,  :url => { :action => :index }, :html => { :id => "formsearch", :class=> "form-inline" }, remote: :true  do |f| %>
+
+
+            <div class="row">
+              <div class="col-md-12">
+                  <div class="form-group">
+                   
+                    <%= f.search_field :last_name_or_name_or_legajo_or_email_cont_any, class: "form-control search_emp  input-sm", placeholder: "Legajo - Nombre - Apellido - DNI "  %>
+               
+                 </div>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-3">
+                  <div class="form-group">
+                    <%= f.label :labors_category_matches, "Categoria" %>
+                    <%= f.select :labors_category_matches,options_for_select([["",""], ["1", "1"], ["2", "2"], ["3","3"], ["4","4"], ["5","5"], ["6","6"], ["7","7"], ["8","8"], ["9","9"], ["10","10"], ["11","11"], ["12","12"], ["13","13"], ["14","14"], ["15","15"], ["16","16"], ["17","17"], ["18","18"], ["19","19"], ["20","20"], ["21","21"], ["22","22"], ["23","23"], ["24","24"]]), {},{class: "form-control  input-sm"}%>
+
+                 </div>
+               </div>
+
+
+              <div class="col-md-4">
+                <div class="form-class">
+                    <%= f.label :labors_contracting_regime_matches, "Regimen" %>
+                    <%= f.select :labors_contracting_regime_matches,  options_for_select([["",""], ["Planta Permanente", "Planta Permanente"], ["Planta Temporaria","Planta Temporaria"], ["Retiro Voluntario","Retiro Voluntario"], ["Otras Instituciones","Otras Instituciones"]]), {}, {class: "form-control  input-sm"}  %>
+                </div>
+              </div>  
+
+              <div class="col-md-2">
+                <div class="form-group">
+                  <%= button_tag(type: 'submit',  class: "btn btn-default btn-sm") do %>
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                  Buscar
+                  <% end %>
+                </div>
+              </div>
+              <div class="col-md-2">
+
+                <div class="form-group">
+                  <%= button_tag(type: 'submit', :name => nil, :id => :q_reset,  class: "btn btn-default btn-sm") do %>
+                  Limpiar
+                  <% end %>
+                </div>
+              </div>   
+            </div>
+            <br>
+
+
+
+          <% end %>
+        </div> <!-- Fin Search Contenedor -->
+      <br>
+
+  <div class="empleadostable">
+        <%= render 'tableusers'%>
+  </div>
+  <div class="container pull-">
+    <%= paginate @employee %>
+
+  </div>
+
+
+</div> <!-- Fin panel panel-default -->
+</div> <!-- Fin empleados list - col-md-8 -->
+
+
+<div class="col-md-3"><!-- col contratos a vencer -->
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        Contratos a expirar 
+        <span class="badge">
+          <%= @count.present? ? @count : '' %>
+        </span>
+      </div>
+        <%= render 'labors/unexpired_contracts', object: @labors %>
+    </div>
+    <br>
+    <div class="panel panel-info"><!-- mayoria de edad en hijos -->
+      <div class="panel-heading">Notificaciones</div>
+        <%= render 'family_groups/full_age', object: @full_age %>
+    </div>
+</div><!-- /col contratos a vencer -->
+
+
+<!-- Window minimize div -->
+<script>
+  $("#buttones").click(function(){
+    if($(this).html() == "x"){
+        $(this).html("<i class='fa fa-window-maximize' aria-hidden='true'></i>");
+    }
+    else{
+        $(this).html("x");
+    }
+    $("#box").slideToggle();
+
+  });
+  $('#regimen').attr("disabled",true);
+  $('#categoria').attr("disabled",true);
+
+</script>

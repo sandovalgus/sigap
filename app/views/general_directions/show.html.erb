@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Direction:</strong>
+  <%= @general_direction.direction %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @general_direction.department %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @general_direction.name %>
+</p>
+
+<%= link_to 'Edit', edit_general_direction_path(@general_direction) %> |
+<%= link_to 'Back', general_directions_path %>

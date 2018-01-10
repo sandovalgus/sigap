@@ -1,0 +1,2 @@
+module GeneralDirectionsHelper
+end

@@ -1,0 +1,20 @@
+name,direction_id,general_direction_id
+"Educación Primaria",1,1
+"Educación Secundaria",1,1
+"Gestión Pedagógica",1,1
+"Gestión Administrativa",1,1
+"Capacitación y Actualización",1,1
+"Contabilidad y Presupuesto",2,1
+"Liquidaciones y Rendiciones de Cuentas",2,1
+"Tesoreria",2,1
+"Patrimonio y Mantenimiento",2,1
+"Compras y Suministros",2,1
+"Planificación Estratégica",3,1
+"Relaciones Institucionales",3,1
+"Informática y Entorno Virtual",3,1
+"Tecnología Educativa",3,1
+"Investigación y Desarrollo",4,1
+"Producción Multimedial",4,1
+"Comunicación Institucional y Protocolo",4,1
+"Despacho y Personal",null,1
+"Jurídico",null,1

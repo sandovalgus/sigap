@@ -53,7 +53,8 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'devise'
+# gem 'devise'
+gem 'devise', git: 'https://github.com/plataformatec/devise' #, ref: '88e9a85'
 #Active Admin master has preliminary support for Rails 5. To give it a try, these Gemfile changes may be needed:
 #gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 #gem 'activeadmin', github: 'activeadmin'

@@ -1,12 +1,12 @@
 class ChangeTypeEmployee < ActiveRecord::Migration[5.0]
   def up
-    change_table :document_family do |t|
-      t.change :document, :string, array: true, default: []
+    change_table :family_groups do |t|
+      t.change :document, :string, array: true
     end
   end
 
   def down
-    change_table :document_family do |t|
+    change_table :family_groups do |t|
       t.change :document, :string
     end
   end

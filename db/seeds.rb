@@ -25,8 +25,8 @@
 # end
 
 
-# - - - - Módulo Laboral - - - - 
-# Importación de datos referente a la posición laboral 
+# # - - - - Módulo Laboral - - - - 
+# # Importación de datos referente a la posición laboral 
 
 # puts "Importing general directions..."
 # CSV.foreach(Rails.root.join("general_directions.csv"), headers: true) do |row|
@@ -53,15 +53,17 @@
 # end
 
 
-(1..100).each do |i|
-  Employee.create!(
-      legajo: Faker::Number.number(5) ,
-      name: Faker::GameOfThrones.character,
-      last_name: Faker::GameOfThrones.house,
-      document_number: Faker::Number.number(8),
-      email: Faker::Internet.email,
-      date_of_admission: Faker::Date.backward(500),
-      avatar:  Faker::Avatar.image("my-own-slug", "50x50", "jpg")
+# (1..100).each do |i|
+#   Employee.create!(
+#       legajo: Faker::Number.number(5) ,
+#       name: Faker::GameOfThrones.character,
+#       last_name: Faker::GameOfThrones.house,
+#       document_number: Faker::Number.number(8),
+#       email: Faker::Internet.email,
+#       date_of_admission: Faker::Date.backward(500),
+#       avatar:  Faker::Avatar.image("my-own-slug", "50x50", "jpg")
 
-    )
-end
+#     )
+# end
+
+User.create!({:email => "admin@admin.com", :password => "adminadmin", :password_confirmation => "adminadmin", :first_name => "Pepe", :last_name => "Pepito" })

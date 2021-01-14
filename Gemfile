@@ -60,7 +60,7 @@ gem 'devise', git: 'https://github.com/plataformatec/devise' #, ref: '88e9a85'
 #gem 'activeadmin', github: 'activeadmin'
 #gem 'active_bootstrap_skin'
 gem 'cancancan'
-gem 'rails_admin', '~> 1.0'
+gem 'rails_admin', '~> 2.0'
 gem 'rails_admin_history_rollback' #Rails Admin History Rollback
 
 # Para generar diagramaas

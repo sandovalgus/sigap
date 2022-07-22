@@ -1,14 +1,4 @@
 GIT
-  remote: git://github.com/rweng/jquery-datatables-rails.git
-  revision: d486b31b192a2924b1913e080ad23460e6b96d31
-  specs:
-    jquery-datatables-rails (3.4.0)
-      actionpack (>= 3.1)
-      jquery-rails
-      railties (>= 3.1)
-      sass-rails
-
-GIT
   remote: https://github.com/atni/dynamic_selectable.git
   revision: d61b36e6aa5f5c30e9c9b9b9635c258e546fb85a
   specs:
@@ -26,6 +16,16 @@ GIT
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
+
+GIT
+  remote: https://github.com/rweng/jquery-datatables-rails.git
+  revision: d486b31b192a2924b1913e080ad23460e6b96d31
+  specs:
+    jquery-datatables-rails (3.4.0)
+      actionpack (>= 3.1)
+      jquery-rails
+      railties (>= 3.1)
+      sass-rails
 
 GEM
   remote: https://rubygems.org/
@@ -270,7 +270,7 @@ GEM
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.3)
-    tzinfo (1.2.3)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
